@@ -26,7 +26,7 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                             x: { field: 'position', type: 'genomic', axis: 'none' },
                             y: { field: 'peak', type: 'quantitative' },
                             color: { value: 'darkgreen' },
-                            style: { outline: 'white' },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         },
@@ -42,7 +42,7 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                             x: { field: 'position', type: 'genomic' },
                             y: { field: 'peak', type: 'quantitative' },
                             color: { value: 'purple' },
-                            style: { outline: 'white' },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         },
@@ -107,7 +107,7 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                                     color: { value: 'green' }
                                 }
                             ],
-                            style: { outline: 'white' },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         }
@@ -156,11 +156,13 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                                     'Repressed PolyComb',
                                     'Weak Repressed PolyComb',
                                     'Quiescent/Low'
-                                ]
+                                ],
+                                binSize: 8
                             },
                             dataTransform: { filter: [{ field: 'value', inRange: [0, 999999] }] },
                             mark: 'bar',
-                            x: { field: 'position', type: 'genomic', axis: 'none' },
+                            x: { field: 'start', type: 'genomic', axis: 'none' },
+                            xe: { field: 'end', type: 'genomic' },
                             y: { field: 'value', type: 'quantitative' },
                             color: {
                                 field: 'category',
@@ -183,7 +185,8 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                                     '#FFFFFF'
                                 ]
                             },
-                            style: { outline: 'white' },
+                            strokeWidth: { value: 0.5 },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         }
@@ -210,7 +213,7 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                             x: { field: 'position', type: 'genomic', axis: 'none' },
                             y: { field: 'peak', type: 'quantitative' },
                             color: { value: 'darkgreen' },
-                            style: { outline: 'white' },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         },
@@ -226,7 +229,7 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                             x: { field: 'position', type: 'genomic' },
                             y: { field: 'peak', type: 'quantitative' },
                             color: { value: 'purple' },
-                            style: { outline: 'white' },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         },
@@ -291,7 +294,7 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                                     color: { value: 'green' }
                                 }
                             ],
-                            style: { outline: 'white' },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         }
@@ -340,11 +343,13 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                                     'Repressed PolyComb',
                                     'Weak Repressed PolyComb',
                                     'Quiescent/Low'
-                                ]
+                                ],
+                                binSize: 8
                             },
                             dataTransform: { filter: [{ field: 'value', inRange: [0, 999999] }] },
                             mark: 'bar',
-                            x: { field: 'position', type: 'genomic', axis: 'none' },
+                            x: { field: 'start', type: 'genomic', axis: 'none' },
+                            xe: { field: 'end', type: 'genomic' },
                             y: { field: 'value', type: 'quantitative' },
                             color: {
                                 field: 'category',
@@ -367,7 +372,8 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
                                     '#FFFFFF'
                                 ]
                             },
-                            style: { outline: 'white' },
+                            strokeWidth: { value: 0.5 },
+                            style: { outline: 'gray' },
                             width: 570,
                             height: 40
                         }
