@@ -304,6 +304,12 @@ export const EX_SPEC_VISUAL_ENCODING_CIRCULAR: GoslingSpec = {
                             },
                             row: { field: 'sample', type: 'nominal', legend: true },
                             color: { field: 'peak', type: 'quantitative', legend: true },
+                            tooltip: [
+                                { field: 'start', type: 'genomic', alt: 'Start Position' },
+                                { field: 'end', type: 'genomic', alt: 'End Position' },
+                                { field: 'peak', type: 'quantitative', alt: 'Value', format: '.2' },
+                                { field: 'sample', type: 'nominal', alt: 'Sample' }
+                            ],
                             width: 350,
                             height: 130
                         }

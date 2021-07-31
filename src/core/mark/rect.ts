@@ -27,6 +27,16 @@ export function drawRect(HGC: any, trackInfo: any, tile: any, model: GoslingTrac
     const cx = trackWidth / 2.0;
     const cy = trackHeight / 2.0;
 
+    let mousePosConvert : ((x: number, y: number) => { x: number, y: number }) | undefined;
+    if(circular) {
+        // Defined a function to convert position in linear to circular for mouse events
+        mousePosConvert = (x: number, y: number) => {
+            const r = trackOuterRadius - (y / trackHeight) * trackRingSize;
+            const pos = cartesianToPolar(x, trackWidth, r, cx, cy, startAngle, endAngle);
+            return { ...pos };
+        }
+    }
+
     /* genomic scale */
     const xScale = trackInfo._xScale;
     const tileUnitWidth = xScale(tileX + tileWidth / tileSize) - xScale(tileX);
@@ -110,16 +120,23 @@ export function drawRect(HGC: any, trackInfo: any, tile: any, model: GoslingTrac
             /* SVG data */
             // We do not currently plan to support SVG elements.
             // trackInfo.svgData.push({ type: 'rect', xs, xe, ys, ye, color, stroke, opacity });
+        }
 
-            /* Tooltip data */
-            if (spec.tooltip) {
-                trackInfo.tooltips.push({
-                    datum: d,
-                    isMouseOver: (x: number, y: number) =>
-                        xs - G < x && x < xe + G && rowPosition + ys - G < y && y < rowPosition + ye + G,
-                    markInfo: { x: xs, y: ys + rowPosition, width: xe - xs, height: ye - ys, type: 'rect' }
-                } as TooltipData);
-            }
+        /* Tooltip data */
+        if (spec.tooltip && !circular) {
+            trackInfo.tooltips.push({
+                datum: d,
+                isMouseOver: (x: number, y: number) => {
+                    let conX = x, conY = y;
+                    // TODO:
+                    // if(mousePosConvert) {
+                    //     conX = mousePosConvert(x, y).x;
+                    //     conY = mousePosConvert(x, y).y;
+                    // }
+                    return xs - G < conX && conX < xe + G && rowPosition + ys - G < conY && conY < rowPosition + ye + G
+                },
+                markInfo: { x: xs, y: ys + rowPosition, width: xe - xs, height: ye - ys, type: 'rect' }
+            } as TooltipData);
         }
     });
 }
