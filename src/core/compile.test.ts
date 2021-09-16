@@ -1,4 +1,4 @@
-import { EX_SPEC_VISUAL_ENCODING } from '../editor/example/visual-encoding';
+import { EX_SPEC_VISUAL_ENCODING } from '../../editor/example/visual-encoding';
 import { compile } from './compile';
 import { getTheme } from './utils/theme';
 

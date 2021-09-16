@@ -1,5 +1,5 @@
 import { validateGoslingSpec } from './validate';
-import { EX_SPEC_CYTOBANDS } from '../../editor/example/ideograms';
+import { EX_SPEC_CYTOBANDS } from '../../../editor/example/ideograms';
 
 describe('Validate Spec', () => {
     it('Example Specs', () => {

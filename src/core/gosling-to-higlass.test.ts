@@ -1,7 +1,7 @@
 import { goslingToHiGlass } from './gosling-to-higlass';
 import { SingleTrack } from './gosling.schema';
 import { HiGlassModel } from './higlass-model';
-import { EX_TRACK_SEMANTIC_ZOOM } from '../editor/example/semantic-zoom';
+import { EX_TRACK_SEMANTIC_ZOOM } from '../../editor/example/semantic-zoom';
 import { convertToFlatTracks } from './utils/spec-preprocess';
 import { getTheme } from './utils/theme';
 

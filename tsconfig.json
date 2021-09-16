@@ -20,16 +20,27 @@
     "strict": true,
     "strictNullChecks": true,
     "resolveJsonModule": true,
-    "jsx": "react"
+    "jsx": "react",
+    "paths": {
+      "generic-filehandle": ["./src/alias/generic-filehandle.ts"],
+      "zlib": ["./src/alias/zlib.ts"],
+      "vm": ["./src/alias/vm.ts"],
+      "@gmod/bgzf-filehandle": ["./src/alias/bgzf-filehandle.ts"],
+      "gosling.js": ["./src/index.ts"],
+      "@gosling.schema": ["./src/core/gosling.schema.ts"],
+      "@higlass.schema": ["./src/core/higlass.schema.ts"]
+    },
+    "baseUrl": "."
   },
   "files": [
-    "src/index.ts"
+    "src/index.ts",
+    "editor/index.tsx"
   ],
   "include": ["src", "src/**/*.d.ts"],
   "exclude": [
     "node_modules",
     "public",
     "build",
-    "dist",
+    "dist"
   ]
 }
