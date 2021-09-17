@@ -358,93 +358,252 @@ export interface Datum {
     [k: string]: number | string;
 }
 
-export interface JSONData {
-    type: 'json';
-    values: Datum[];
-    quantitativeFields?: string[];
-    chromosomeField?: string;
-    genomicFields?: string[];
-    sampleLength?: number; // This limit the total number of rows fetched (default: 1000)
+/**
+ * The JSON data format allows users to include data directly in the Gosling's JSON specification.
+ */
 
-    // !!! experimental
+export interface JSONData {
+    /**
+     * define data type
+     */
+    type: 'json';
+
+    /** values in the form of JSON */
+    values: Datum[];
+
+    /** specify the name of quantitative data fields */
+    quantitativeFields?: string[];
+
+    /** specify the name of chromosome data fields */
+    chromosomeField?: string;
+
+    /** specify the name of genomic data fields */
+    genomicFields?: string[];
+
+    /** specify the number of rows loaded from the url. default=1000 */
+    sampleLength?: number;
+
+    /** experimental */
     genomicFieldsToConvert?: {
         chromosomeField: string;
         genomicFields: string[];
     }[];
 }
+
+/**
+ * Any small enough tabular data files, such as tsv, csv, BED, BEDPE, and GFF, can be loaded using "csv" data specification.
+ */
 
 export interface CSVData {
     type: 'csv';
+
+    /**
+     * specify the URL address of the data file
+     */
     url: string;
+
+    /**
+     * specify file separator, default=','
+     */
     separator?: string;
+
+    /**
+     * specify the name of quantitative data fields
+     */
     quantitativeFields?: string[];
+
+    /**
+     * specify the name of chromosome data fields
+     */
     chromosomeField?: string;
+
+    /**
+     * specify the name of genomic data fields
+     */
     genomicFields?: string[];
+
+    /**
+     * specify the number of rows loaded from the url. default=1000
+     */
     sampleLength?: number; // This limit the total number of rows fetched (default: 1000)
 
-    // !!! below is experimental
+    /**
+     * specify the names of data fields if a CSV file is headerless
+     */
     headerNames?: string[];
+
+    /**
+     * experimental
+     */
     chromosomePrefix?: string;
+
+    /**
+     * experimental
+     */
     longToWideId?: string;
+
+    /**
+     * experimental
+     */
     genomicFieldsToConvert?: {
         chromosomeField: string;
         genomicFields: string[];
     }[];
 }
 
+/**
+ * Two-dimensional quantitative values,
+ * one axis for genomic coordinate and the other for different samples, can be converted into HiGlass' `"multivec"` data.
+ * For example, multiple BigWig files can be converted into a single multivec file.
+ * You can also convert sequence data (FASTA) into this format where rows will be different nucleotide bases (e.g., A, T, G, C)
+ * and quantitative values represent the frequency. Find out more about this format at [HiGlass Docs](https://docs.higlass.io/data_preparation.html#multivec-files).
+ */
 export interface MultivecData {
     type: 'multivec';
+
+    /**
+     * specify the URL address of the data file
+     */
     url: string;
+
+    /**
+     * assign a field name of the middle position of genomic intervals
+     */
     column: string;
+
+    /**
+     * assign a field name of samples
+     */
     row: string;
+
+    /**
+     * assign a field name of quantitative values
+     */
     value: string;
+
+    /**
+     *  assign names of individual samples
+     */
     categories?: string[];
+
+    /**
+     * assign a field name of the start position of genomic intervals
+     */
     start?: string;
+
+    /**
+     * assign a field name of the end position of genomic intervals
+     */
     end?: string;
-    binSize?: number; // Binning the genomic interval in tiles (unit size: 256)
+
+    /**
+     * Binning the genomic interval in tiles (unit size: 256)
+     */
+    binSize?: number;
 }
 
 export interface BIGWIGData {
     type: 'bigwig';
+
+    /**
+     * specify the URL address of the data file
+     */
     url: string;
+
+    /**
+     * assign a field name of the middle position of genomic intervals
+     */
     column: string;
+
+    /**
+     * assign a field name of quantitative values
+     */
     value: string;
+    /**
+     * assign a field name of the start position of genomic intervals
+     */
     start?: string;
+
+    /**
+     * assign a field name of the end position of genomic intervals
+     */
     end?: string;
-    binSize?: number; // Binning the genomic interval in tiles (unit size: 256)
+
+    /**
+     * Binning the genomic interval in tiles (unit size: 256)
+     */
+    binSize?: number;
 }
+
+/**
+ * One-dimensional quantitative values along genomic position (e.g., bigwig) can be converted into HiGlass' `"vector"` format data.
+ * Find out more about this format at [HiGlass Docs](https://docs.higlass.io/data_preparation.html#bigwig-files).
+ */
 
 export interface VectorData {
     type: 'vector';
+    /**
+     * specify the URL address of the data file
+     */
     url: string;
+
+    /** assign a field name of the middle position of genomic intervals */
     column: string;
+
+    /** assign a field name of quantitative values */
     value: string;
+
+    /** assign a field name of the start position of genomic intervals */
     start?: string;
+
+    /** assign a field name of the end position of genomic intervals */
     end?: string;
-    binSize?: number; // Binning the genomic interval in tiles (unit size: 256)
+
+    /** Binning the genomic interval in tiles (unit size: 256) */
+    binSize?: number;
 }
 
+/**
+ * Regular BED or similar files can be pre-aggregated for the scalable data exploration.
+ * Find our more about this format at [HiGlass Docs](https://docs.higlass.io/data_preparation.html#bed-files).
+ */
 export interface BEDDBData {
     type: 'beddb';
+    /**specify the URL address of the data file*/
     url: string;
+
+    /**specify the name of genomic data fields */
     genomicFields: { index: number; name: string }[];
+
+    /**specify the column indexes, field names, and field types */
     valueFields?: { index: number; name: string; type: 'nominal' | 'quantitative' }[];
+
     // this is a somewhat arbitrary option for reading gene annotation datasets
     // should be multi-value fields (e.g., "1,2,3")
+    /** experimental */
     exonIntervalFields?: [{ index: number; name: string }, { index: number; name: string }];
 }
 
+/**
+ * Binary Alignment Map (BAM) is the comprehensive raw data of genome sequencing;
+ * it consists of the lossless, compressed binary representation of the Sequence Alignment Map-files.
+ */
 export interface BAMData {
     type: 'bam';
+
+    /** URL link to the BAM data file */
     url: string;
+
+    /** URL link to the index file of the BAM file */
     indexUrl: string;
 }
 
-/* ----------------------------- DATA TRANSFORM ----------------------------- */
 export interface MatrixData {
     type: 'matrix';
     url: string;
 }
+
+/* ----------------------------- DATA TRANSFORM ----------------------------- */
 
 export type DataTransform =
     | FilterTransform

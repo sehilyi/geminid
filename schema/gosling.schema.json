@@ -37,8 +37,10 @@
     },
     "BAMData": {
       "additionalProperties": false,
+      "description": "Binary Alignment Map (BAM) is the comprehensive raw data of genome sequencing; it consists of the lossless, compressed binary representation of the Sequence Alignment Map-files.",
       "properties": {
         "indexUrl": {
+          "description": "URL link to the index file of the BAM file",
           "type": "string"
         },
         "type": {
@@ -46,6 +48,7 @@
           "type": "string"
         },
         "url": {
+          "description": "URL link to the BAM data file",
           "type": "string"
         }
       },
@@ -58,8 +61,10 @@
     },
     "BEDDBData": {
       "additionalProperties": false,
+      "description": "Regular BED or similar files can be pre-aggregated for the scalable data exploration. Find our more about this format at [HiGlass Docs](https://docs.higlass.io/data_preparation.html#bed-files).",
       "properties": {
         "exonIntervalFields": {
+          "description": "experimental",
           "items": [
             {
               "additionalProperties": false,
@@ -99,6 +104,7 @@
           "type": "array"
         },
         "genomicFields": {
+          "description": "specify the name of genomic data fields",
           "items": {
             "additionalProperties": false,
             "properties": {
@@ -122,9 +128,11 @@
           "type": "string"
         },
         "url": {
+          "description": "specify the URL address of the data file",
           "type": "string"
         },
         "valueFields": {
+          "description": "specify the column indexes, field names, and field types",
           "items": {
             "additionalProperties": false,
             "properties": {
@@ -163,15 +171,19 @@
       "additionalProperties": false,
       "properties": {
         "binSize": {
+          "description": "Binning the genomic interval in tiles (unit size: 256)",
           "type": "number"
         },
         "column": {
+          "description": "assign a field name of the middle position of genomic intervals",
           "type": "string"
         },
         "end": {
+          "description": "assign a field name of the end position of genomic intervals",
           "type": "string"
         },
         "start": {
+          "description": "assign a field name of the start position of genomic intervals",
           "type": "string"
         },
         "type": {
@@ -179,9 +191,11 @@
           "type": "string"
         },
         "url": {
+          "description": "specify the URL address of the data file",
           "type": "string"
         },
         "value": {
+          "description": "assign a field name of quantitative values",
           "type": "string"
         }
       },
@@ -195,20 +209,25 @@
     },
     "CSVData": {
       "additionalProperties": false,
+      "description": "Any small enough tabular data files, such as tsv, csv, BED, BEDPE, and GFF, can be loaded using \"csv\" data specification.",
       "properties": {
         "chromosomeField": {
+          "description": "specify the name of chromosome data fields",
           "type": "string"
         },
         "chromosomePrefix": {
+          "description": "experimental",
           "type": "string"
         },
         "genomicFields": {
+          "description": "specify the name of genomic data fields",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "genomicFieldsToConvert": {
+          "description": "experimental",
           "items": {
             "additionalProperties": false,
             "properties": {
@@ -231,24 +250,29 @@
           "type": "array"
         },
         "headerNames": {
+          "description": "specify the names of data fields if a CSV file is headerless",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "longToWideId": {
+          "description": "experimental",
           "type": "string"
         },
         "quantitativeFields": {
+          "description": "specify the name of quantitative data fields",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "sampleLength": {
+          "description": "specify the number of rows loaded from the url. default=1000",
           "type": "number"
         },
         "separator": {
+          "description": "specify file separator, default=','",
           "type": "string"
         },
         "type": {
@@ -256,6 +280,7 @@
           "type": "string"
         },
         "url": {
+          "description": "specify the URL address of the data file",
           "type": "string"
         }
       },
@@ -1281,17 +1306,21 @@
     },
     "JSONData": {
       "additionalProperties": false,
+      "description": "The JSON data format allows users to include data directly in the Gosling's JSON specification.",
       "properties": {
         "chromosomeField": {
+          "description": "specify the name of chromosome data fields",
           "type": "string"
         },
         "genomicFields": {
+          "description": "specify the name of genomic data fields",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "genomicFieldsToConvert": {
+          "description": "experimental",
           "items": {
             "additionalProperties": false,
             "properties": {
@@ -1314,19 +1343,23 @@
           "type": "array"
         },
         "quantitativeFields": {
+          "description": "specify the name of quantitative data fields",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "sampleLength": {
+          "description": "specify the number of rows loaded from the url. default=1000",
           "type": "number"
         },
         "type": {
           "const": "json",
+          "description": "define data type",
           "type": "string"
         },
         "values": {
+          "description": "values in the form of JSON",
           "items": {
             "$ref": "#/definitions/Datum"
           },
@@ -1660,26 +1693,33 @@
     },
     "MultivecData": {
       "additionalProperties": false,
+      "description": "Two-dimensional quantitative values, one axis for genomic coordinate and the other for different samples, can be converted into HiGlass' `\"multivec\"` data. For example, multiple BigWig files can be converted into a single multivec file. You can also convert sequence data (FASTA) into this format where rows will be different nucleotide bases (e.g., A, T, G, C) and quantitative values represent the frequency. Find out more about this format at [HiGlass Docs](https://docs.higlass.io/data_preparation.html#multivec-files).",
       "properties": {
         "binSize": {
+          "description": "Binning the genomic interval in tiles (unit size: 256)",
           "type": "number"
         },
         "categories": {
+          "description": "assign names of individual samples",
           "items": {
             "type": "string"
           },
           "type": "array"
         },
         "column": {
+          "description": "assign a field name of the middle position of genomic intervals",
           "type": "string"
         },
         "end": {
+          "description": "assign a field name of the end position of genomic intervals",
           "type": "string"
         },
         "row": {
+          "description": "assign a field name of samples",
           "type": "string"
         },
         "start": {
+          "description": "assign a field name of the start position of genomic intervals",
           "type": "string"
         },
         "type": {
@@ -1687,9 +1727,11 @@
           "type": "string"
         },
         "url": {
+          "description": "specify the URL address of the data file",
           "type": "string"
         },
         "value": {
+          "description": "assign a field name of quantitative values",
           "type": "string"
         }
       },
@@ -4084,17 +4126,22 @@
     },
     "VectorData": {
       "additionalProperties": false,
+      "description": "One-dimensional quantitative values along genomic position (e.g., bigwig) can be converted into HiGlass' `\"vector\"` format data. Find out more about this format at [HiGlass Docs](https://docs.higlass.io/data_preparation.html#bigwig-files).",
       "properties": {
         "binSize": {
+          "description": "Binning the genomic interval in tiles (unit size: 256)",
           "type": "number"
         },
         "column": {
+          "description": "assign a field name of the middle position of genomic intervals",
           "type": "string"
         },
         "end": {
+          "description": "assign a field name of the end position of genomic intervals",
           "type": "string"
         },
         "start": {
+          "description": "assign a field name of the start position of genomic intervals",
           "type": "string"
         },
         "type": {
@@ -4102,9 +4149,11 @@
           "type": "string"
         },
         "url": {
+          "description": "specify the URL address of the data file",
           "type": "string"
         },
         "value": {
+          "description": "assign a field name of quantitative values",
           "type": "string"
         }
       },
