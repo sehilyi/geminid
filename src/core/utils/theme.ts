@@ -136,7 +136,7 @@ export interface MarkStyle {
 export function getTheme(theme: Theme = 'light'): Required<CompleteThemeDeep> {
     if (typeof theme === 'string') {
         if (gt.isThereTheme(theme)) {
-            return gt.getTheme(theme);
+            return JSON.parse(JSON.stringify(gt.getTheme(theme)));
         } else if (theme === 'dark' || theme === 'light') {
             return THEMES[theme];
         } else {
@@ -146,7 +146,7 @@ export function getTheme(theme: Theme = 'light'): Required<CompleteThemeDeep> {
         // Iterate all keys to override from base
         let baseSpec = JSON.parse(JSON.stringify(THEMES['light']));
         if (gt.isThereTheme(theme.base)) {
-            baseSpec = gt.getTheme(theme.base);
+            baseSpec = JSON.parse(JSON.stringify(gt.getTheme(theme.base)));
         } else if (theme.base === 'light' || theme.base === 'dark') {
             baseSpec = JSON.parse(JSON.stringify(THEMES[theme.base]));
         }

@@ -212,6 +212,9 @@
           "items": {
             "additionalProperties": false,
             "properties": {
+              "assembly": {
+                "$ref": "#/definitions/Assembly"
+              },
               "chromosomeField": {
                 "type": "string"
               },
@@ -486,6 +489,9 @@
         "_invalidTrack": {
           "type": "boolean"
         },
+        "_parentViewId": {
+          "type": "string"
+        },
         "_renderingId": {
           "type": "string"
         },
@@ -513,9 +519,6 @@
         },
         "layout": {
           "$ref": "#/definitions/Layout"
-        },
-        "linkingId": {
-          "type": "string"
         },
         "orientation": {
           "$ref": "#/definitions/Orientation"
@@ -556,6 +559,9 @@
         "width": {
           "type": "number"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "xAxis": {
           "$ref": "#/definitions/AxisPosition"
         },
@@ -572,8 +578,27 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -911,9 +936,6 @@
         "layout": {
           "$ref": "#/definitions/Layout"
         },
-        "linkingId": {
-          "type": "string"
-        },
         "orientation": {
           "$ref": "#/definitions/Orientation"
         },
@@ -932,6 +954,9 @@
           },
           "type": "array"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "xAxis": {
           "$ref": "#/definitions/AxisPosition"
         },
@@ -948,8 +973,27 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -1602,9 +1646,6 @@
         "layout": {
           "$ref": "#/definitions/Layout"
         },
-        "linkingId": {
-          "type": "string"
-        },
         "orientation": {
           "$ref": "#/definitions/Orientation"
         },
@@ -1630,6 +1671,9 @@
           },
           "type": "array"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "xAxis": {
           "$ref": "#/definitions/AxisPosition"
         },
@@ -1646,8 +1690,27 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -1753,6 +1816,9 @@
         "_invalidTrack": {
           "type": "boolean"
         },
+        "_parentViewId": {
+          "type": "string"
+        },
         "_renderingId": {
           "type": "string"
         },
@@ -1799,9 +1865,6 @@
         "layout": {
           "$ref": "#/definitions/Layout"
         },
-        "linkingId": {
-          "type": "string"
-        },
         "mark": {
           "$ref": "#/definitions/Mark"
         },
@@ -1820,6 +1883,9 @@
             "properties": {
               "_invalidTrack": {
                 "type": "boolean"
+              },
+              "_parentViewId": {
+                "type": "string"
               },
               "_renderingId": {
                 "type": "string"
@@ -1860,9 +1926,6 @@
               },
               "innerRadius": {
                 "type": "number"
-              },
-              "linkingId": {
-                "type": "string"
               },
               "mark": {
                 "$ref": "#/definitions/Mark"
@@ -1939,6 +2002,9 @@
               "x1": {
                 "$ref": "#/definitions/Channel"
               },
+              "x1LinkingId": {
+                "type": "string"
+              },
               "x1e": {
                 "$ref": "#/definitions/Channel"
               },
@@ -1958,6 +2024,9 @@
                   }
                 ]
               },
+              "xLinkingId": {
+                "type": "string"
+              },
               "xOffset": {
                 "type": "number"
               },
@@ -1972,6 +2041,22 @@
               },
               "y1e": {
                 "$ref": "#/definitions/Channel"
+              },
+              "yDomain": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/DomainInterval"
+                  },
+                  {
+                    "$ref": "#/definitions/DomainChrInterval"
+                  },
+                  {
+                    "$ref": "#/definitions/DomainChr"
+                  }
+                ]
+              },
+              "yLinkingId": {
+                "type": "string"
               },
               "yOffset": {
                 "type": "number"
@@ -2056,6 +2141,9 @@
         "x1": {
           "$ref": "#/definitions/Channel"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "x1e": {
           "$ref": "#/definitions/Channel"
         },
@@ -2075,6 +2163,9 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
         },
@@ -2089,6 +2180,22 @@
         },
         "y1e": {
           "$ref": "#/definitions/Channel"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -2109,6 +2216,9 @@
       "properties": {
         "_invalidTrack": {
           "type": "boolean"
+        },
+        "_parentViewId": {
+          "type": "string"
         },
         "_renderingId": {
           "type": "string"
@@ -2159,9 +2269,6 @@
         },
         "layout": {
           "$ref": "#/definitions/Layout"
-        },
-        "linkingId": {
-          "type": "string"
         },
         "mark": {
           "$ref": "#/definitions/Mark"
@@ -2253,6 +2360,9 @@
         "x1": {
           "$ref": "#/definitions/Channel"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "x1e": {
           "$ref": "#/definitions/Channel"
         },
@@ -2272,6 +2382,9 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
         },
@@ -2286,6 +2399,22 @@
         },
         "y1e": {
           "$ref": "#/definitions/Channel"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -2319,6 +2448,9 @@
       "properties": {
         "_invalidTrack": {
           "type": "boolean"
+        },
+        "_parentViewId": {
+          "type": "string"
         },
         "_renderingId": {
           "type": "string"
@@ -2372,9 +2504,6 @@
         "layout": {
           "$ref": "#/definitions/Layout"
         },
-        "linkingId": {
-          "type": "string"
-        },
         "mark": {
           "$ref": "#/definitions/Mark"
         },
@@ -2393,6 +2522,9 @@
             "properties": {
               "_invalidTrack": {
                 "type": "boolean"
+              },
+              "_parentViewId": {
+                "type": "string"
               },
               "_renderingId": {
                 "type": "string"
@@ -2433,9 +2565,6 @@
               },
               "innerRadius": {
                 "type": "number"
-              },
-              "linkingId": {
-                "type": "string"
               },
               "mark": {
                 "$ref": "#/definitions/Mark"
@@ -2512,6 +2641,9 @@
               "x1": {
                 "$ref": "#/definitions/Channel"
               },
+              "x1LinkingId": {
+                "type": "string"
+              },
               "x1e": {
                 "$ref": "#/definitions/Channel"
               },
@@ -2531,6 +2663,9 @@
                   }
                 ]
               },
+              "xLinkingId": {
+                "type": "string"
+              },
               "xOffset": {
                 "type": "number"
               },
@@ -2545,6 +2680,22 @@
               },
               "y1e": {
                 "$ref": "#/definitions/Channel"
+              },
+              "yDomain": {
+                "anyOf": [
+                  {
+                    "$ref": "#/definitions/DomainInterval"
+                  },
+                  {
+                    "$ref": "#/definitions/DomainChrInterval"
+                  },
+                  {
+                    "$ref": "#/definitions/DomainChr"
+                  }
+                ]
+              },
+              "yLinkingId": {
+                "type": "string"
               },
               "yOffset": {
                 "type": "number"
@@ -2632,6 +2783,9 @@
         "x1": {
           "$ref": "#/definitions/Channel"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "x1e": {
           "$ref": "#/definitions/Channel"
         },
@@ -2651,6 +2805,9 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
         },
@@ -2665,6 +2822,22 @@
         },
         "y1e": {
           "$ref": "#/definitions/Channel"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -2746,9 +2919,6 @@
         "layout": {
           "$ref": "#/definitions/Layout"
         },
-        "linkingId": {
-          "type": "string"
-        },
         "orientation": {
           "$ref": "#/definitions/Orientation"
         },
@@ -2780,6 +2950,9 @@
           },
           "type": "array"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "xAxis": {
           "$ref": "#/definitions/AxisPosition"
         },
@@ -2796,8 +2969,27 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -2815,6 +3007,9 @@
           "properties": {
             "_invalidTrack": {
               "type": "boolean"
+            },
+            "_parentViewId": {
+              "type": "string"
             },
             "_renderingId": {
               "type": "string"
@@ -2868,9 +3063,6 @@
             },
             "layout": {
               "$ref": "#/definitions/Layout"
-            },
-            "linkingId": {
-              "type": "string"
             },
             "mark": {
               "$ref": "#/definitions/Mark"
@@ -2962,6 +3154,9 @@
             "x1": {
               "$ref": "#/definitions/Channel"
             },
+            "x1LinkingId": {
+              "type": "string"
+            },
             "x1e": {
               "$ref": "#/definitions/Channel"
             },
@@ -2981,6 +3176,9 @@
                 }
               ]
             },
+            "xLinkingId": {
+              "type": "string"
+            },
             "xOffset": {
               "type": "number"
             },
@@ -2995,6 +3193,22 @@
             },
             "y1e": {
               "$ref": "#/definitions/Channel"
+            },
+            "yDomain": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/DomainInterval"
+                },
+                {
+                  "$ref": "#/definitions/DomainChrInterval"
+                },
+                {
+                  "$ref": "#/definitions/DomainChr"
+                }
+              ]
+            },
+            "yLinkingId": {
+              "type": "string"
             },
             "yOffset": {
               "type": "number"
@@ -3016,6 +3230,9 @@
           "properties": {
             "_invalidTrack": {
               "type": "boolean"
+            },
+            "_parentViewId": {
+              "type": "string"
             },
             "_renderingId": {
               "type": "string"
@@ -3069,9 +3286,6 @@
             },
             "layout": {
               "$ref": "#/definitions/Layout"
-            },
-            "linkingId": {
-              "type": "string"
             },
             "mark": {
               "$ref": "#/definitions/Mark"
@@ -3170,6 +3384,9 @@
             "x1": {
               "$ref": "#/definitions/Channel"
             },
+            "x1LinkingId": {
+              "type": "string"
+            },
             "x1e": {
               "$ref": "#/definitions/Channel"
             },
@@ -3189,6 +3406,9 @@
                 }
               ]
             },
+            "xLinkingId": {
+              "type": "string"
+            },
             "xOffset": {
               "type": "number"
             },
@@ -3203,6 +3423,22 @@
             },
             "y1e": {
               "$ref": "#/definitions/Channel"
+            },
+            "yDomain": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/DomainInterval"
+                },
+                {
+                  "$ref": "#/definitions/DomainChrInterval"
+                },
+                {
+                  "$ref": "#/definitions/DomainChr"
+                }
+              ]
+            },
+            "yLinkingId": {
+              "type": "string"
             },
             "yOffset": {
               "type": "number"
@@ -3232,9 +3468,6 @@
             "layout": {
               "$ref": "#/definitions/Layout"
             },
-            "linkingId": {
-              "type": "string"
-            },
             "orientation": {
               "$ref": "#/definitions/Orientation"
             },
@@ -3259,6 +3492,9 @@
               },
               "type": "array"
             },
+            "x1LinkingId": {
+              "type": "string"
+            },
             "xAxis": {
               "$ref": "#/definitions/AxisPosition"
             },
@@ -3275,8 +3511,27 @@
                 }
               ]
             },
+            "xLinkingId": {
+              "type": "string"
+            },
             "xOffset": {
               "type": "number"
+            },
+            "yDomain": {
+              "anyOf": [
+                {
+                  "$ref": "#/definitions/DomainInterval"
+                },
+                {
+                  "$ref": "#/definitions/DomainChrInterval"
+                },
+                {
+                  "$ref": "#/definitions/DomainChr"
+                }
+              ]
+            },
+            "yLinkingId": {
+              "type": "string"
             },
             "yOffset": {
               "type": "number"
@@ -3294,6 +3549,9 @@
       "properties": {
         "_invalidTrack": {
           "type": "boolean"
+        },
+        "_parentViewId": {
+          "type": "string"
         },
         "_renderingId": {
           "type": "string"
@@ -3340,9 +3598,6 @@
         },
         "layout": {
           "$ref": "#/definitions/Layout"
-        },
-        "linkingId": {
-          "type": "string"
         },
         "mark": {
           "$ref": "#/definitions/Mark"
@@ -3428,6 +3683,9 @@
         "x1": {
           "$ref": "#/definitions/Channel"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "x1e": {
           "$ref": "#/definitions/Channel"
         },
@@ -3447,6 +3705,9 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
         },
@@ -3461,6 +3722,22 @@
         },
         "y1e": {
           "$ref": "#/definitions/Channel"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -3542,6 +3819,9 @@
         "_invalidTrack": {
           "type": "boolean"
         },
+        "_parentViewId": {
+          "type": "string"
+        },
         "_renderingId": {
           "type": "string"
         },
@@ -3591,9 +3871,6 @@
         },
         "layout": {
           "$ref": "#/definitions/Layout"
-        },
-        "linkingId": {
-          "type": "string"
         },
         "mark": {
           "$ref": "#/definitions/Mark"
@@ -3692,6 +3969,9 @@
         "x1": {
           "$ref": "#/definitions/Channel"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "x1e": {
           "$ref": "#/definitions/Channel"
         },
@@ -3711,6 +3991,9 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
         },
@@ -3725,6 +4008,22 @@
         },
         "y1e": {
           "$ref": "#/definitions/Channel"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"
@@ -3934,6 +4233,9 @@
         "_invalidTrack": {
           "type": "boolean"
         },
+        "_parentViewId": {
+          "type": "string"
+        },
         "_renderingId": {
           "type": "string"
         },
@@ -3967,9 +4269,6 @@
         },
         "layout": {
           "$ref": "#/definitions/Layout"
-        },
-        "linkingId": {
-          "type": "string"
         },
         "orientation": {
           "$ref": "#/definitions/Orientation"
@@ -4013,6 +4312,9 @@
         "width": {
           "type": "number"
         },
+        "x1LinkingId": {
+          "type": "string"
+        },
         "xAxis": {
           "$ref": "#/definitions/AxisPosition"
         },
@@ -4029,8 +4331,27 @@
             }
           ]
         },
+        "xLinkingId": {
+          "type": "string"
+        },
         "xOffset": {
           "type": "number"
+        },
+        "yDomain": {
+          "anyOf": [
+            {
+              "$ref": "#/definitions/DomainInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChrInterval"
+            },
+            {
+              "$ref": "#/definitions/DomainChr"
+            }
+          ]
+        },
+        "yLinkingId": {
+          "type": "string"
         },
         "yOffset": {
           "type": "number"

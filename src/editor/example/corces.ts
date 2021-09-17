@@ -78,7 +78,7 @@ export const EX_SPEC_CORCES_ET_AL: GoslingSpec = {
         },
         {
             xDomain: { chromosome: '3', interval: [52168000, 52890000] },
-            linkingId: 'detail',
+            xLinkingId: 'detail',
             mark: 'bar',
             x: {
                 field: 'position',

@@ -58,7 +58,8 @@ export const HiGlassComponentWrapper = forwardRef<HiGlassApi | undefined, HiGlas
                         viewPaddingBottom: 0,
                         viewPaddingLeft: 0,
                         viewPaddingRight: 0,
-                        sizeMode: 'bounded',
+                        sizeMode: 'overflow',
+                        bounded: false, // deprecated option
                         rangeSelectionOnAlt: true // this allows switching between `selection` and `zoom&pan` mode
                     }}
                     viewConfig={viewConfig}

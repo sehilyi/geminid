@@ -29,7 +29,7 @@ export const GoslingComponent = forwardRef<{ api: GoslingApi }, GoslingCompProps
     // HiGlass API
     const hgRef = useRef<HiGlassApi>();
 
-    const theme = getTheme(props.theme || 'light');
+    const theme = getTheme(props.theme);
 
     // Gosling APIs
     useEffect(() => {
@@ -40,7 +40,7 @@ export const GoslingComponent = forwardRef<{ api: GoslingApi }, GoslingCompProps
         } else {
             ref.current = { api };
         }
-    }, [ref, hgRef, viewConfig, theme]);
+    }, [ref, hgRef, viewConfig, props.theme]);
 
     useEffect(() => {
         if (props.spec) {
@@ -74,7 +74,7 @@ export const GoslingComponent = forwardRef<{ api: GoslingApi }, GoslingCompProps
                 theme
             );
         }
-    }, [props.spec, theme]);
+    }, [props.spec, props.theme]);
 
     // HiGlass component should be mounted only once
     const higlassComponent = useMemo(
@@ -93,7 +93,7 @@ export const GoslingComponent = forwardRef<{ api: GoslingApi }, GoslingCompProps
                 }}
             />
         ),
-        [viewConfig, size, theme]
+        [viewConfig, size, props.theme]
     );
 
     return higlassComponent;

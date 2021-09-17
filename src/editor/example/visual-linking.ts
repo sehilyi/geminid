@@ -72,7 +72,7 @@ export const EX_SPEC_LINKING: GoslingSpec = {
         {
             layout: 'linear',
             xDomain: { chromosome: '1', interval: [160000000, 200000000] },
-            linkingId: 'detail',
+            xLinkingId: 'detail',
             tracks: [
                 {
                     data: {

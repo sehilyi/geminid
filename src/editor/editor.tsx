@@ -24,6 +24,7 @@ import './editor.css';
 import { ICONS, ICON_INFO } from './icon';
 // @ts-ignore
 import { Themes } from 'gosling-theme';
+import { Theme } from '../core/utils/theme';
 
 const INIT_DEMO_INDEX = examples.findIndex(d => d.forceShow) !== -1 ? examples.findIndex(d => d.forceShow) : 0;
 
@@ -147,7 +148,7 @@ function Editor(props: any) {
     const [refreshData, setRefreshData] = useState<boolean>(false);
 
     const [demo, setDemo] = useState(examples[urlExampleIndex === -1 ? INIT_DEMO_INDEX : urlExampleIndex]);
-    const [theme, setTheme] = useState('light');
+    const [theme, setTheme] = useState<Theme | undefined>('light');
     const [hg, setHg] = useState<HiGlassSpec>();
     const [code, setCode] = useState(defaultCode);
     const [goslingSpec, setGoslingSpec] = useState<gosling.GoslingSpec>();
@@ -232,6 +233,7 @@ function Editor(props: any) {
         setSelectedPreviewData(0);
         setCode(urlSpec ?? (urlGist ? emptySpec() : stringify(demo.spec as GoslingSpec)));
         setHg(undefined);
+        setTheme(demo.theme ?? 'light');
     }, [demo]);
 
     useEffect(() => {
@@ -462,7 +464,7 @@ function Editor(props: any) {
                                 setTheme(e.target.value);
                             }
                         }}
-                        defaultValue={theme}
+                        defaultValue={'light'}
                     >
                         {Object.keys(Themes).map((d: string) => (
                             <option key={d} value={d}>

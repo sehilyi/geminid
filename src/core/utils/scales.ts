@@ -48,7 +48,7 @@ export function getNumericDomain(domain: Domain, assembly?: Assembly) {
 export function shareScaleAcrossTracks(trackModels: GoslingTrackModel[], force?: boolean) {
     // we update the spec with a global domain
     const globalDomain: { [k: string]: number[] | string[] } = {};
-    const channelKeys = SUPPORTED_CHANNELS;
+    const channelKeys = SUPPORTED_CHANNELS.filter(c => !c.includes('x'));
 
     // generate global domains
     trackModels.forEach(model => {

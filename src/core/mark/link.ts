@@ -107,8 +107,13 @@ export function drawLink(g: PIXI.Graphics, trackInfo: any, model: GoslingTrackMo
                     [_x1, _x2, _x3, _x4] = [_x1, _x2, _x3, _x4].sort((a, b) => a - b);
                 }
 
-                if (_x1 > trackWidth || _x4 < 0 || Math.abs(_x4 - _x1) < 0.5) {
+                if (Math.abs(_x4 - _x1) < 0.5) {
                     // Do not draw very small visual marks
+                    return;
+                }
+
+                if (_x1 > trackWidth && _x4 < 0) {
+                    // Do not draw if both target and source of bands are outside the visible area
                     return;
                 }
 

@@ -112,7 +112,7 @@ export const EX_SPEC_CUSTOM_THEME: GoslingSpec = {
         },
         {
             xDomain: { chromosome: '3', interval: [52168000, 52890000] },
-            linkingId: 'detail',
+            xLinkingId: 'detail',
             mark: 'bar',
             x: {
                 field: 'position',

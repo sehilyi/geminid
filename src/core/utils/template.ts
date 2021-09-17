@@ -149,7 +149,7 @@ export const GoslingTemplates: TemplateTrackDef[] = [
                     domain: ['gneg', 'gpos25', 'gpos50', 'gpos75', 'gpos100', 'gvar', 'acen'],
                     range: ['white', 'lightgray', 'gray', 'gray', 'black', '#7B9CC8', '#DC4542']
                 },
-                size: { base: 'chrHeight', value: 18 },
+                size: { base: 'chrHeight' },
                 x: { base: 'startPosition', type: 'genomic' },
                 xe: { base: 'endPosition', type: 'genomic' },
                 stroke: { base: 'stainStroke', value: 'gray' },
@@ -167,7 +167,7 @@ export const GoslingTemplates: TemplateTrackDef[] = [
                     domain: ['gneg', 'gpos25', 'gpos50', 'gpos75', 'gpos100', 'gvar', 'acen'],
                     range: ['white', 'lightgray', 'gray', 'gray', 'black', '#7B9CC8', '#DC4542']
                 },
-                size: { base: 'chrHeight', value: 18 },
+                size: { base: 'chrHeight' },
                 x: { base: 'startPosition', type: 'genomic' },
                 xe: { base: 'endPosition', type: 'genomic' },
                 stroke: { base: 'stainStroke', value: 'gray' },
@@ -185,7 +185,7 @@ export const GoslingTemplates: TemplateTrackDef[] = [
                     domain: ['gneg', 'gpos25', 'gpos50', 'gpos75', 'gpos100', 'gvar', 'acen'],
                     range: ['white', 'lightgray', 'gray', 'gray', 'black', '#7B9CC8', '#DC4542']
                 },
-                size: { base: 'chrHeight', value: 18 },
+                size: { base: 'chrHeight' },
                 x: { base: 'startPosition', type: 'genomic' },
                 xe: { base: 'endPosition', type: 'genomic' },
                 stroke: { base: 'stainStroke', value: 'gray' },

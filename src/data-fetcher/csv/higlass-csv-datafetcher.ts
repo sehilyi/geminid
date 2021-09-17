@@ -98,16 +98,17 @@ function CSVDataFetcher(HGC: any, ...args: any): any {
                             // This spec is used when multiple chromosomes are stored in a single row
                             genomicFieldsToConvert.forEach((d: any) => {
                                 const cField = d.chromosomeField;
+                                const assembly = d.assembly ?? this.assembly;
                                 d.genomicFields.forEach((g: string) => {
                                     try {
-                                        if (this.assembly !== 'unknown') {
+                                        if (assembly !== 'unknown') {
                                             // This means we need to use the relative position considering the start position of individual chr.
                                             const chr = chromosomePrefix
                                                 ? row[cField].replace(chromosomePrefix, 'chr')
                                                 : row[cField].includes('chr')
                                                 ? row[cField]
                                                 : `chr${row[cField]}`;
-                                            row[g] = GET_CHROM_SIZES(this.assembly).interval[chr][0] + +row[g];
+                                            row[g] = GET_CHROM_SIZES(assembly).interval[chr][0] + +row[g];
                                         } else {
                                             // In this case, we use the genomic position as it is w/o adding the cumulative length of chr.
                                             // So, nothing to do additionally.
@@ -245,31 +246,35 @@ function CSVDataFetcher(HGC: any, ...args: any): any {
 
         tile(z: any, x: any, y: any) {
             return this.tilesetInfo()?.then((tsInfo: any) => {
+                const sizeLimit = this.dataConfig.sampleLength ?? 1000;
                 const tileWidth = +tsInfo.max_width / 2 ** +z;
 
                 // get the bounds of the tile
                 const minX = tsInfo.min_pos[0] + x * tileWidth;
                 const maxX = tsInfo.min_pos[0] + (x + 1) * tileWidth;
 
-                // filter the data so that only the visible data is sent to tracks
-                let tabularData = this.values.filter((d: any) => {
-                    if (this.dataConfig.genomicFields) {
-                        return this.dataConfig.genomicFields.find((g: any) => minX < d[g] && d[g] <= maxX);
-                    } else {
-                        const allGenomicFields: string[] = [];
-                        this.dataConfig.genomicFieldsToConvert.forEach((d: any) =>
-                            allGenomicFields.push(...d.genomicFields)
-                        );
-                        return allGenomicFields.find((g: any) => minX < d[g] && d[g] <= maxX);
-                    }
-                });
+                let tabularData = this.values;
 
                 // filter data based on the `DataTransform` spec
                 this.filter?.forEach(f => {
                     tabularData = filterData(f, tabularData);
                 });
 
-                const sizeLimit = this.dataConfig.sampleLength ?? 1000;
+                // filter the data so that only the visible data is sent to tracks
+                if (tabularData.length > sizeLimit) {
+                    tabularData = tabularData.filter((d: any) => {
+                        if (this.dataConfig.genomicFields) {
+                            return this.dataConfig.genomicFields.find((g: any) => minX < d[g] && d[g] <= maxX);
+                        } else {
+                            const allGenomicFields: string[] = [];
+                            this.dataConfig.genomicFieldsToConvert.forEach((d: any) =>
+                                allGenomicFields.push(...d.genomicFields)
+                            );
+                            return allGenomicFields.find((g: any) => minX < d[g] && d[g] <= maxX);
+                        }
+                    });
+                }
+
                 return {
                     // sample the data to make it managable for visualization components
                     tabularData: tabularData.length > sizeLimit ? sampleSize(tabularData, sizeLimit) : tabularData,

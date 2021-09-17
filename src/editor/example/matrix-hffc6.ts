@@ -7,7 +7,7 @@ export const EX_SPEC_MATRIX_HFFC6: GoslingSpec = {
     arrangement: 'horizontal',
     xDomain: { chromosome: '7', interval: [77700000, 81000000] },
     spacing: 1,
-    linkingId: '-',
+    xLinkingId: '-',
     views: [
         {
             orientation: 'vertical',

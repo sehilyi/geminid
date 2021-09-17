@@ -277,7 +277,7 @@ describe('Arrangement', () => {
                         tracks: [t]
                     },
                     {
-                        linkingId: '_',
+                        xLinkingId: '_',
                         tracks: [t]
                     }
                 ]

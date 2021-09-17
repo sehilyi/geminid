@@ -61,7 +61,6 @@
         "lodash": "^4.17.15",
         "mixwith": "^0.1.1",
         "pubsub-js": "^1.9.3",
-        "react-grid-layout": "^1.2.5",
         "threads": "^1.6.4",
         "worker-loader": "^3.0.8"
     },

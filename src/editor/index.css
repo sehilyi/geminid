@@ -23,3 +23,8 @@ body {
 code {
     font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
 }
+
+/* TODO: This component should be hidden directly from RGL */
+.react-resizable-handle {
+    visibility: hidden;
+}

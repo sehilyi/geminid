@@ -172,6 +172,9 @@ function GoslingTrack(HGC: any, ...args: any[]): any {
             if (HGC.libraries.PIXI.GRAPHICS_CURVES.adaptive) {
                 HGC.libraries.PIXI.GRAPHICS_CURVES.maxLength = 1;
                 HGC.libraries.PIXI.GRAPHICS_CURVES.maxSegments = 2048 * 10;
+            } else {
+                HGC.libraries.PIXI.GRAPHICS_CURVES.maxLength = 10;
+                HGC.libraries.PIXI.GRAPHICS_CURVES.maxSegments = 2048;
             }
         }
 

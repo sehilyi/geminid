@@ -819,7 +819,14 @@ export class GoslingTrackModel {
     /**
      * Set a new scale for a certain channel.
      */
-    public setChannelScale(channelKey: keyof typeof ChannelTypes, scale: ScaleType) {
+    public setChannelScale(
+        channelKey: keyof typeof ChannelTypes,
+        scale: ScaleType,
+        config?: { range: [number, number] }
+    ) {
+        if (config?.range) {
+            (scale as any).range(config.range);
+        }
         this.channelScales[channelKey] = scale;
     }
 

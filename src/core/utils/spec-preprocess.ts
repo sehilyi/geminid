@@ -17,7 +17,8 @@ import {
     IsOverlaidTrack,
     IsFlatTracks,
     IsStackedTracks,
-    Is2DTrack
+    Is2DTrack,
+    IsConnectorView
 } from '../gosling.schema.guards';
 import {
     DEFAULT_INNER_RADIUS_PROP,
@@ -137,7 +138,8 @@ export function traverseToFixSpecDownstream(spec: GoslingSpec | SingleView, pare
         if (spec.orientation === undefined) spec.orientation = parentDef.orientation;
         if (spec.static === undefined) spec.static = parentDef.static !== undefined ? parentDef.static : false;
         if (spec.xDomain === undefined) spec.xDomain = parentDef.xDomain;
-        if (spec.linkingId === undefined) spec.linkingId = parentDef.linkingId;
+        if (spec.yDomain === undefined) spec.yDomain = parentDef.yDomain;
+        if (spec.xLinkingId === undefined) spec.xLinkingId = parentDef.xLinkingId;
         if (spec.centerRadius === undefined) spec.centerRadius = parentDef.centerRadius;
         if (spec.spacing === undefined && !('tracks' in spec)) spec.spacing = parentDef.spacing;
         if (spec.xOffset === undefined) spec.xOffset = parentDef.xOffset;
@@ -157,6 +159,7 @@ export function traverseToFixSpecDownstream(spec: GoslingSpec | SingleView, pare
         if (spec.xOffset === undefined) spec.xOffset = 0;
         if (spec.yOffset === undefined) spec.yOffset = 0;
         // Nothing to do when `xDomain` not suggested
+        // Nothing to do when `yDomain` not suggested
         // Nothing to do when `xLinkID` not suggested
     }
 
@@ -171,10 +174,14 @@ export function traverseToFixSpecDownstream(spec: GoslingSpec | SingleView, pare
         tracks = spreadTracksByData(tracks);
 
         const linkID = uuid.v4();
+        const parentViewId = uuid.v4();
         tracks.forEach((track, i, array) => {
             // If size not defined, set default ones
             if (!track.width) track.width = DEFAULT_TRACK_WIDTH_LINEAR;
             if (!track.height) track.height = DEFAULT_TRACK_HEIGHT_LINEAR;
+
+            // Set the parent view ID so that we can use this information when linking views
+            track._parentViewId = parentViewId;
 
             /**
              * Process a stack option.
@@ -242,7 +249,7 @@ export function traverseToFixSpecDownstream(spec: GoslingSpec | SingleView, pare
             /**
              * A track with 2D genomic coordinates is forced to use a linear layout
              */
-            if (Is2DTrack(track)) {
+            if (Is2DTrack(track) && !IsConnectorView(track)) {
                 // TODO: Add a test for this.
                 track.layout = 'linear';
             }
@@ -261,10 +268,23 @@ export function traverseToFixSpecDownstream(spec: GoslingSpec | SingleView, pare
             }
 
             /**
+             * Add y-axis domain
+             */
+            if ((IsSingleTrack(track) || IsOverlaidTrack(track)) && IsChannelDeep(track.y) && !track.y.domain) {
+                track.y.domain = spec.yDomain;
+            } else if (IsOverlaidTrack(track)) {
+                track.overlay.forEach(o => {
+                    if (IsChannelDeep(o.y) && !o.y.domain) {
+                        o.y.domain = spec.yDomain;
+                    }
+                });
+            }
+
+            /**
              * Link tracks in a single view
              */
             if ((IsSingleTrack(track) || IsOverlaidTrack(track)) && IsChannelDeep(track.x) && !track.x.linkingId) {
-                track.x.linkingId = spec.linkingId ?? linkID;
+                track.x.linkingId = spec.xLinkingId ?? linkID;
             } else if (IsOverlaidTrack(track)) {
                 let isAdded = false;
                 track.overlay.forEach(o => {
@@ -272,7 +292,7 @@ export function traverseToFixSpecDownstream(spec: GoslingSpec | SingleView, pare
 
                     if (IsChannelDeep(o.x) && !o.x.linkingId) {
                         // TODO: Is this safe?
-                        o.x.linkingId = spec.linkingId ?? linkID;
+                        o.x.linkingId = spec.xLinkingId ?? linkID;
                         isAdded = true;
                     }
                 });

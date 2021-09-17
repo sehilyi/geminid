@@ -70,7 +70,11 @@ export function goslingToHiGlass(
             height,
             options: {
                 /* Mouse hover position */
-                showMousePosition: firstResolvedSpec.layout === 'circular' ? false : theme.root.showMousePosition, // show mouse position only for linear tracks // TODO: or vertical
+                showMousePosition:
+                    firstResolvedSpec.layout === 'circular' ||
+                    (Is2DTrack(firstResolvedSpec) && firstResolvedSpec.mark === 'betweenLink')
+                        ? false
+                        : theme.root.showMousePosition, // show mouse position only for linear tracks // TODO: or vertical
                 mousePositionColor: theme.root.mousePositionColor,
                 /* Track title */
                 name: firstResolvedSpec.layout === 'linear' ? firstResolvedSpec.title : ' ',
@@ -130,22 +134,20 @@ export function goslingToHiGlass(
             hgTrack.options.colorbarPosition = (firstResolvedSpec.color as any)?.legend ? 'topRight' : 'hidden';
         }
 
-        if (firstResolvedSpec.overlayOnPreviousTrack) {
-            hgModel
-                .setViewOrientation(firstResolvedSpec.orientation) // TODO: Orientation should be assigned to 'individual' views
-                .addTrackToCombined(hgTrack);
-        } else {
-            hgModel
-                .setViewOrientation(firstResolvedSpec.orientation) // TODO: Orientation should be assigned to 'individual' views
-                .setAssembly(assembly) // TODO: Assembly should be assigned to 'individual' views
-                .addDefaultView(firstResolvedSpec.id ? `${firstResolvedSpec.id}-view` : uuid.v1(), assembly)
-                .setDomain(xDomain, Is2DTrack(firstResolvedSpec) ? yDomain : xDomain)
-                .adjustDomain(firstResolvedSpec.orientation, width, height)
-                .setMainTrack(hgTrack)
-                .addTrackSourceServers(server)
-                .setZoomFixed(firstResolvedSpec.static === true)
-                .setLayout(layout);
-        }
+        hgModel
+            .setViewOrientation(firstResolvedSpec.orientation) // TODO: Orientation should be assigned to 'individual' views
+            .setAssembly(assembly) // TODO: Assembly should be assigned to 'individual' views
+            .addDefaultView(firstResolvedSpec.id ? `${firstResolvedSpec.id}-view` : uuid.v1(), assembly)
+            .setDomain(xDomain, Is2DTrack(firstResolvedSpec) ? yDomain : xDomain)
+            .adjustDomain(firstResolvedSpec.orientation, width, height)
+            .setMainTrack(hgTrack)
+            .addTrackSourceServers(server)
+            .setZoomFixed(
+                Is2DTrack(firstResolvedSpec) && firstResolvedSpec.mark === 'betweenLink'
+                    ? true
+                    : firstResolvedSpec.static === true
+            )
+            .setLayout(layout);
 
         // determine the compactness type of an axis considering the size of a track
         const getAxisNarrowType = (
@@ -238,9 +240,6 @@ export function goslingToHiGlass(
             );
         }
     }
-
-    // Uncomment the following code to test with specific HiGlass viewConfig
-    // hgModel.setExampleHiglassViewConfig();
 
     return hgModel;
 }

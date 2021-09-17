@@ -60,9 +60,13 @@ export interface CommonViewDef {
 
     assembly?: Assembly;
 
-    // TODO: Change to domain?
     xDomain?: DomainInterval | DomainChrInterval | DomainChr;
-    linkingId?: string;
+    yDomain?: DomainInterval | DomainChrInterval | DomainChr;
+
+    xLinkingId?: string;
+    x1LinkingId?: string; // TODO:
+    yLinkingId?: string; // TODO:
+
     xAxis?: AxisPosition; // not supported currently
 
     /**
@@ -102,6 +106,7 @@ export interface CommonTrackDef extends CommonViewDef, CommonRequiredTrackDef {
     // Internally used properties
     _renderingId?: string;
     _invalidTrack?: boolean; // flag to ignore rendering certain tracks if they have problems // !!! TODO: add tests
+    _parentViewId?: string;
 
     // To test upcoming feature.
     prerelease?: { testUsingNewRectRenderingForBAM?: boolean };
@@ -389,6 +394,7 @@ export interface CSVData {
     genomicFieldsToConvert?: {
         chromosomeField: string;
         genomicFields: string[];
+        assembly?: Assembly;
     }[];
 }
 

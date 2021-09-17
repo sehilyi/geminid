@@ -4,7 +4,7 @@ export const EX_SPEC_GREMLIN: GoslingSpec = {
     title: "Gremlin (O'Brien et al. 2010)",
     views: [
         {
-            linkingId: 'view1',
+            xLinkingId: 'view1',
             xDomain: { chromosome: '5', interval: [0, 80000000] },
             tracks: [
                 {

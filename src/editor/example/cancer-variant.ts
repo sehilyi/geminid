@@ -200,7 +200,7 @@ export const EX_SPEC_CANCER_VARIANT_PROTOTYPE: GoslingSpec = {
                     ]
                 },
                 {
-                    linkingId: 'mid-scale',
+                    xLinkingId: 'mid-scale',
                     xDomain: { chromosome: '1' },
                     layout: 'linear',
                     tracks: [
