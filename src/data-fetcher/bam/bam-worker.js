@@ -381,7 +381,7 @@ const dataConfs = {};
 
 const init = (uid, bamUrl, baiUrl, chromSizesUrl) => {
     // TODO: Support different URLs
-    // chromSizesUrl = chromSizesUrl || `https://s3.amazonaws.com/gosling-lang.org/data/hg19.chrom.sizes`;
+    chromSizesUrl = chromSizesUrl || `https://s3.amazonaws.com/gosling-lang.org/data/hg19.chrom.sizes`;
 
     if (!bamFiles[bamUrl]) {
         // We do not yet have this file cached.

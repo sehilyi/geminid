@@ -1,5 +1,4 @@
-/*
- * TODO: Support esm.
+/* TODO: Support esm.
  * This code is based on the following repo:
  * https://github.com/higlass/higlass-bigwig-datafetcher/blob/main/src/BigwigDataFetcher.js
  */
@@ -12,7 +11,7 @@ function BBIDataFetcher(HGC, ...args) {
         throw new Error('Uncaught TypeError: Class constructor cannot be invoked without "new"');
     }
 
-    class BBIDataFetcherClass {
+    const cls = class BBIDataFetcherClass {
         constructor(dataConfig) {
             dataConfig.chromSizesUrl = 'https://aveit.s3.amazonaws.com/higlass/data/sequence/hg38.chrom.sizes'; //https://s3.amazonaws.com/gosling-lang.org/data/hg38.chrom.sizes';
             this.dataConfig = dataConfig;
@@ -271,9 +270,9 @@ function BBIDataFetcher(HGC, ...args) {
             // return the highest reductionLevel, if we could not find anything better
             return level || reductionLevels.slice(-1)[0];
         }
-    }
+    };
 
-    return new BBIDataFetcherClass(...args);
+    return new cls(...args);
 }
 
 BBIDataFetcher.config = {

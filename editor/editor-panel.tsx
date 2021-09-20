@@ -1,8 +1,8 @@
 import React, { useRef, useState, useEffect } from 'react'; // eslint-disable-line no-unused-vars
 import MonacoEditor from 'react-monaco-editor';
-import * as Monaco from 'monaco-editor/esm/vs/editor/editor.api';
 import ReactResizeDetector from 'react-resize-detector';
 import { GoslingSchema } from 'gosling.js';
+import * as Monaco from './monaco';
 
 function EditorPanel(props: {
     code: string;

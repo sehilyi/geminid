@@ -42,7 +42,7 @@ export class RemoteFile implements GenericFilehandle {
         try {
             response = await this.fetchImplementation(input, init);
         } catch (e) {
-            if (e.message === 'Failed to fetch') {
+            if ((e as Error).message === 'Failed to fetch') {
                 // refetch to to help work around a chrome bug (discussed in generic-filehandle issue #72) in
                 // which the chrome cache returns a CORS error for content in its cache.
                 // see also https://github.com/GMOD/jbrowse-components/pull/1511
