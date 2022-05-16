@@ -22,6 +22,7 @@ The Gosling's key features compared to existing visualization libraries and gram
 
 -   [Documentation](http://gosling-lang.org/)
 -   [Gosling.js Editor](https://gosling.js.org/)
+-   [Scientific Paper](https://doi.org/10.1109/TVCG.2021.3114876)
 -   [Roadmap](https://github.com/gosling-lang/gosling.js/projects/1)
 
 ## Contributing to Gosling.js
@@ -39,24 +40,3 @@ We welcome and greatly appreciate your contribution to this project! Please read
 -   Fritz Lekschas ([@flekschas](https://twitter.com/flekschas) | [lekschas.de](https://lekschas.de))
 -   Trevor Manz ([@trevmanz](https://twitter.com/trevmanz) | <trevor_manz@g.harvard.edu>)
 -   Nils Gehlenborg ([@ngehlenborg](https://twitter.com/ngehlenborg) | <nils@hms.harvard.edu>)
-
-## Citation
-
-[L'Yi et al., 2021. “Gosling: A Grammar-based Toolkit for Scalable and Interactive Genomics Data Visualization.”](https://osf.io/6evmb)
-
-```bib
-@article{lyi2021gosling,
-  author = {L'Yi, Sehi and Wang, Qianwen and Lekschas, Fritz and Gehlenborg, Nils},
-  doi = {10.1109/TVCG.2021.3114876},
-  journal = {IEEE Transactions on Visualization and Computer Graphics},
-  month = {1},
-  number = {1},
-  pages = {140--150},
-  title = {{Gosling: A Grammar-based Toolkit forScalable and Interactive Genomics Data Visualization}},
-  year = {2022}
-}
-```
-
-## License
-
-This project is licensed under the terms of the [MIT license](https://github.com/gosling-lang/gosling.js/blob/master/LICENSE.md).
