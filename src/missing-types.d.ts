@@ -389,6 +389,6 @@ declare module 'higlass-register' {
     interface RegisterOptions {
         pluginType: 'track' | 'dataFetcher';
     }
-    function register<Options>(definition: TrackDef<Options> | DataFetcherDef, options: RegisterOptions = {}): void;
+    function register(definition: TrackDef<Options> | DataFetcherDef, options: RegisterOptions = {}): void;
     export = register;
 }
