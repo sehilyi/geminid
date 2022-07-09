@@ -1,6 +1,7 @@
 declare module 'monaco-editor/esm/vs/editor/edcore.main' {
     export * from 'monaco-editor';
 }
+
 // Partial types from https://github.com/higlass/higlass/blob/develop/app/scripts/configs/available-for-plugins.js
 declare module '@higlass/types' {
     export type HGC = {
@@ -9,9 +10,20 @@ declare module '@higlass/types' {
         tracks: typeof import('@higlass/tracks');
         utils: typeof import('@higlass/utils');
     };
-    export type { Context, Track, TrackOptions, TrackConfig } from '@higlass/tracks';
+    import type { Track, TrackOptions, TrackConfig } from '@higlass/tracks';
+    export { Track, TrackOptions, TrackConfig };
+    export type { Context } from '@higlass/tracks';
     export type { ChromInfo } from '@higlass/utils';
     export type { TilesetInfo } from '@higlass/services';
+    export type PluginTrackFactory<Options extends TrackOptions> = (
+        HGC: HGC,
+        context: Context<Options>,
+        options: Options
+    ) => Track;
+    type AsConstructor<T> = T extends (...args: infer Args) => infer Ret ? { new (...args: Args): Ret } : never;
+    export type PluginTrack<Options extends TrackOptions> = AsConstructor<PluginTrackFactory<Options>> & {
+        config: TrackConfig<Options>;
+    };
 }
 
 declare module '@higlass/libraries' {
@@ -359,4 +371,24 @@ declare module '@higlass/utils' {
             scale: ScaleContinuousNumeric<number, number>
         ): [zoomLevel: number, x: number][];
     };
+}
+
+// Types for https://github.com/higlass/higlass-register/blob/master/src/index.js
+declare module 'higlass-register' {
+    import type { PluginTrack, TrackConfig } from '@higlass/types';
+    type TrackDef<Options> = {
+        name: string;
+        track: PluginTrack<Options>;
+        config: TrackConfig<Options>;
+    };
+    type DataFetcherDef = {
+        // TODO(2022-07-09): type out data fetchers
+        dataFetcher: any;
+        config: any;
+    };
+    interface RegisterOptions {
+        pluginType: 'track' | 'dataFetcher';
+    }
+    function register<Options>(definition: TrackDef<Options> | DataFetcherDef, options: RegisterOptions = {}): void;
+    export = register;
 }

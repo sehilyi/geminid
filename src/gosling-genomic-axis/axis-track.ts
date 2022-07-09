@@ -11,7 +11,7 @@ import { getTextStyle } from '../core/utils/text-style';
 import { definePluginTrack } from '../core/utils/define-plugin-track';
 
 import type { TextStyle } from '../core/utils/text-style';
-import type { PluginTrackFactory, TrackConfig } from '../core/utils/define-plugin-track';
+import type { PluginTrackFactory, TrackConfig } from '@higlass/types';
 
 const TICK_WIDTH = 200;
 const TICK_HEIGHT = 6;

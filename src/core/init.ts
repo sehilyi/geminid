@@ -1,4 +1,3 @@
-// @ts-ignore
 import { default as higlassRegister } from 'higlass-register';
 // @ts-ignore
 import { TextTrack } from 'higlass-text';
@@ -20,6 +19,7 @@ export function init() {
      */
     higlassRegister({
         name: 'GoslingTrack',
+        // @ts-expect-error type of track
         track: GoslingTrack,
         config: GoslingTrack.config
     });
@@ -29,6 +29,7 @@ export function init() {
      */
     higlassRegister({
         name: 'Gosling2DTrack',
+        // @ts-expect-error type of track
         track: GoslingTrack,
         config: {
             ...GoslingTrack.config,
@@ -60,6 +61,7 @@ export function init() {
      */
     higlassRegister({
         name: 'BrushTrack',
+        // @ts-expect-error type of track
         track: BrushTrack,
         config: BrushTrack.config
     });
