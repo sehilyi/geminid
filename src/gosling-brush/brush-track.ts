@@ -1,4 +1,5 @@
 import { arc as d3arc } from 'd3-shape';
+import type { D3DragEvent } from 'd3-drag';
 import * as uuid from 'uuid';
 import { RADIAN_GAP, valueToRadian } from '../core/utils/polar';
 
@@ -159,15 +160,15 @@ function BrushTrack(HGC: any, ...args: any[]): any {
          * Function to call upon hearing click event on the brush
          */
         dragged() {
-            const start = () => {
-                this.startEvent = HGC.libraries.d3Selection.event.sourceEvent;
+            const start = (event: D3DragEvent<SVGElement, CircularBrushData, ) => {
+                this.startEvent = event.sourceEvent;
                 this.prevExtent = [this.circularBrushData[0].startAngle, this.circularBrushData[0].endAngle];
             };
 
-            const drag = (d: CircularBrushData) => {
+            const drag = (event: D3DragEvent, d: CircularBrushData) => {
                 const [x, y] = this.position;
                 const [w, h] = this.dimensions;
-                const endEvent = HGC.libraries.d3Selection.event.sourceEvent;
+                const endEvent = event.sourceEvent;
 
                 // adjust the position
                 const startX = this.startEvent.layerX - x;

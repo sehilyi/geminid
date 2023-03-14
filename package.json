@@ -69,7 +69,7 @@
         "fflate": "^0.7.1",
         "generic-filehandle": "2.2.1",
         "gosling-theme": "^0.0.10",
-        "higlass": "^1.11.8",
+        "higlass": "^1.12.2",
         "higlass-register": "^0.3.0",
         "higlass-text": "^0.1.1",
         "json-stringify-pretty-compact": "^2.0.0",
