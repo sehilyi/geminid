@@ -276,10 +276,10 @@ export function displace(
             // Find a row to place this segment
             let rowIndex = occupiedSpaceInRows[group].findIndex(d => {
                 // Find a space and update the occupancy info.
-                if (end < d.start) {
+                if (end < +d.start) {
                     d.start = start;
                     return true;
-                } else if (d.end < start) {
+                } else if (+d.end < start) {
                     d.end = end;
                     return true;
                 }

@@ -446,7 +446,9 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
             this.xScale(newXScale);
             this.yScale(newYScale);
 
+            // reference: https://github.com/higlass/higlass/blob/b2ee5940c519982dc53685153ff863d64443d0bb/app/scripts/TiledPixiTrack.js#L359
             this.refreshTiles();
+            
             this.draw();
             this.forceDraw();
         }
@@ -466,7 +468,8 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
             this.tileSize = this.tilesetInfo?.tile_size ?? 1024;
 
             const tiles = this.visibleAndFetchedTiles();
-
+            // XXX: second tile is pointing to previous locations but do not contain tileData.tabularData
+            console.error('tiles are here', tiles); 
             // generated tabular data
             tiles.forEach(tile => this.#generateTabularData(tile, force));
 
@@ -474,11 +477,13 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
             this.combineAllTilesIfNeeded();
 
             // apply data transforms to the tabular data and generate track models
+            console.warn('how many tiles?', tiles, this.#processedTileInfo);
             const models = tiles.flatMap(tile => this.transformDataAndCreateModels(tile));
 
             shareScaleAcrossTracks(models);
 
             const flatTileData = ([] as Datum[]).concat(...models.map(d => d.data()));
+            console.error('duplicated?', flatTileData, models);
             if (flatTileData.length !== 0) {
                 publish('rawData', { id: context.viewUid, data: flatTileData });
             }
@@ -494,8 +499,7 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
                 Object.values(this.fetchedTiles).map(x => x.remoteId)
             );
             const tiles = this.visibleAndFetchedTiles();
-            if (tiles?.[0]) {
-                const tile = tiles[0];
+            for (const tile of tiles) {
                 const [refTile] = HGC.utils.trackUtils.calculate1DVisibleTiles(this.tilesetInfo, this._xScale);
                 tile.tileData.zoomLevel = refTile[0];
                 tile.tileData.tilePos = [refTile[1], refTile[1]];
@@ -523,7 +527,6 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
                         return;
                     }
                 }
-
                 this.setVisibleTiles(tiles);
             } else {
                 if (!this.tilesetInfo) {
@@ -720,8 +723,9 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
          * Called by this.processAllTiles() so this method needs to be public.
          */
         combineAllTilesIfNeeded() {
+            console.error('what');
             if (!this.shouldCombineTiles()) return;
-
+            console.error('???????????????');
             const tiles = this.visibleAndFetchedTiles();
 
             if (!tiles || tiles.length <= 1) {
@@ -736,16 +740,20 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
 
             tiles.forEach((tile, i) => {
                 const tileInfo = this.#processedTileInfo[tile.tileId];
+                console.warn(tileInfo);
                 if (tileInfo) {
                     // Combine data
                     merged = [...merged, ...tileInfo.tabularData];
-
+                    
                     // Since we merge the data to the first one, skip rendering the rest
                     tileInfo.skipRendering = i !== 0;
                 }
             });
+            console.error('hhhhhh here', tiles, this.#processedTileInfo);
 
             const firstTileInfo = this.#processedTileInfo[tiles[0].tileId];
+            const uniqueNames = Array.from(new Set(merged.map(d => d.name)));
+            merged = uniqueNames.map(name => merged.find(d => d.name === name)!);
             firstTileInfo.tabularData = merged;
 
             // Remove duplicated if any. Sparse tiles can have duplications.
@@ -764,8 +772,9 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
                 return tiles.length >= 1 && 'dense' in tiles[0].tileData;
             };
             // BAM data fetcher already combines the datasets;
-            const isBamDataFetcher = this.dataFetcher instanceof BamDataFetcher;
-            return (includesDisplaceTransform && !hasDenseTiles()) || isBamDataFetcher;
+            // const isBamDataFetcher = this.dataFetcher instanceof BamDataFetcher;
+            console.log(includesDisplaceTransform, !hasDenseTiles());
+            return (includesDisplaceTransform && !hasDenseTiles());
         }
 
         /**
@@ -785,7 +794,7 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
                 // we do not need to re-construct tabular data
                 return;
             }
-
+            console.warn('her', tile);
             if (!tile.tileData.tilePos) {
                 // we do not have this information ready yet, i.e., cannot calculate `tileX`
                 return;
@@ -806,6 +815,7 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
             if ('tabularData' in tile.tileData) {
                 // some data fetchers directly generates `tabularData`
                 tileInfo.tabularData = tile.tileData.tabularData;
+                console.warn('her--dome', tile.tileData.tabularData);
             } else {
                 // generate tabular data
                 const { tileX, tileY, tileWidth, tileHeight } = this.getTilePosAndDimensions(
@@ -828,6 +838,7 @@ const factory: PluginTrackFactory<Tile, GoslingTrackOptions> = (HGC, context, op
                 if (tabularData) {
                     tileInfo.tabularData = tabularData;
                 }
+                console.warn('her--dome-tabularData', tile, tabularData);
             }
 
             this.#processedTileInfo[tile.tileId] = tileInfo;

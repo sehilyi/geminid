@@ -23,17 +23,15 @@ class BamDataFetcher<Config extends BamData> implements TabularDataFetcher<Infer
     static config = { type: 'bam' };
     dataConfig = {}; // required for higlass
     uid: string;
-    fetchTimeout?: ReturnType<typeof setTimeout>;
-    toFetch: Set<string>;
-
     MAX_TILE_WIDTH = 2e4 as const;
-
-    private worker: Promise<ModuleThread<WorkerApi>>;
-
     // This is set by us but is accessed in `fetchTilesDebounced`
-    track?: {
+    track?: any & {
         fetching: { delete(id: string): void };
     };
+    
+    private toFetch: Set<string>;
+    private fetchTimeout?: ReturnType<typeof setTimeout>;
+    private worker: Promise<ModuleThread<WorkerApi>>;
 
     constructor(HGC: import('@higlass/types').HGC, config: Config & { assembly: Assembly }) {
         this.uid = HGC.libraries.slugid.nice();
@@ -54,19 +52,9 @@ class BamDataFetcher<Config extends BamData> implements TabularDataFetcher<Infer
     }
 
     fetchTilesDebounced(receivedTiles: (tiles: Tiles) => void, tileIds: string[]) {
-        const { toFetch } = this;
+        this.track.drawLoadingCue();
 
-        const thisZoomLevel = tileIds[0].split('.')[0]; // Example of tileIds: ["3.0", "3.1"]
-        const toFetchZoomLevel = toFetch.size ? [...toFetch][0].split('.')[0] : null;
-
-        if (thisZoomLevel !== toFetchZoomLevel) {
-            for (const tileId of this.toFetch) {
-                this.track?.fetching.delete(tileId);
-            }
-            this.toFetch.clear();
-        }
-
-        tileIds.forEach(x => this.toFetch.add(x));
+        tileIds.forEach(tileId => this.toFetch.add(tileId));
 
         if (this.fetchTimeout) {
             clearTimeout(this.fetchTimeout);
@@ -76,15 +64,44 @@ class BamDataFetcher<Config extends BamData> implements TabularDataFetcher<Infer
             this.sendFetch(receivedTiles, [...this.toFetch]);
             this.toFetch.clear();
         }, DEBOUNCE_TIME);
+
+        // const { toFetch } = this;
+
+        // const thisZoomLevel = tileIds[0].split('.')[0]; // Example of tileIds: ["3.0", "3.1"]
+        // const toFetchZoomLevel = toFetch.size ? [...toFetch][0].split('.')[0] : null;
+
+        // if (thisZoomLevel !== toFetchZoomLevel) {
+        //     for (const tileId of this.toFetch) {
+        //         this.track?.fetching.delete(tileId);
+        //     }
+        //     this.toFetch.clear();
+        // }
+
+        // tileIds.forEach(x => this.toFetch.add(x));
+
+        // if (this.fetchTimeout) {
+        //     clearTimeout(this.fetchTimeout);
+        // }
+
+        // this.fetchTimeout = setTimeout(() => {
+        //     this.sendFetch(receivedTiles, [...this.toFetch]);
+        //     this.toFetch.clear();
+        // }, DEBOUNCE_TIME);
     }
 
     async sendFetch(receivedTiles: (tiles: Tiles) => void, tileIds: string[]) {
         (await this.worker).fetchTilesDebounced(this.uid, tileIds).then(receivedTiles);
     }
 
+     /**
+     * Called by GoslingTrack. This is how the track gets data
+     * @param tileIds The position of the tile
+     * @returns A promise to the BamTiles
+     */
     async getTabularData(tileIds: string[]): Promise<InferTileType<Config>[]> {
         const buf = await (await this.worker).getTabularData(this.uid, tileIds);
-        return JSON.parse(new TextDecoder().decode(buf));
+        const parsed = JSON.parse(new TextDecoder().decode(buf));
+        return parsed;
     }
 }
 
