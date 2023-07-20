@@ -21,7 +21,7 @@ import { Themes } from 'gosling-theme';
 import { ICONS, type ICON_INFO } from './icon';
 import { getHtmlTemplate } from './html-template';
 import ErrorBoundary from './error-boundary';
-import { traverseTracksAndViews } from '../src/core/utils/spec-preprocess';
+import { traverseTracksAndViews } from '../src/compiler/spec-preprocess';
 import { examples, type Example } from './example';
 import EditorPanel, { type EditorLangauge } from './EditorPanel';
 import EditorExamples from './EditorExamples';

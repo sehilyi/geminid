@@ -1,4 +1,4 @@
-import type { _EventMap } from './gosling.schema';
+import type { _EventMap } from '../core/gosling.schema';
 import PubSub from 'pubsub-js';
 
 type EventName = keyof _EventMap;

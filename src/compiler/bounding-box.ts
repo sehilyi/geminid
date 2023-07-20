@@ -8,7 +8,7 @@ import {
     DEWFAULT_TITLE_PADDING_ON_TOP_AND_BOTTOM
 } from '../defaults';
 import { resolveSuperposedTracks } from './overlay';
-import { traverseTracksAndViews, traverseViewArrangements } from './spec-preprocess';
+import { traverseTracksAndViews, traverseViewArrangements } from '../../compiler/spec-preprocess';
 import type { CompleteThemeDeep } from './theme';
 
 export interface Size {

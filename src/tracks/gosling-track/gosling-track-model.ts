@@ -22,7 +22,7 @@ import {
 } from 'd3-scale';
 import { interpolateViridis } from 'd3-scale-chromatic';
 import { min as d3min, max as d3max, sum as d3sum, group } from 'd3-array';
-import { HIGLASS_AXIS_SIZE } from './higlass-model';
+import { HIGLASS_AXIS_SIZE } from '../../compiler/higlass-model';
 import { SUPPORTED_CHANNELS } from './mark';
 import type { PIXIVisualProperty } from './visual-property.schema';
 import { rectProperty } from './mark/rect';
@@ -42,7 +42,7 @@ import {
 } from './gosling.schema.guards';
 import { CHANNEL_DEFAULTS } from './channel';
 import { type CompleteThemeDeep, getTheme } from './utils/theme';
-import { MouseEventModel } from '@gosling-mouse-event';
+import { MouseEventModel } from 'src/tracks/gosling-track/gosling-mouse-event';
 
 export type ScaleType =
     | ScaleLinear<any, any>

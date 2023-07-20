@@ -1,4 +1,4 @@
-import { pointsToDegree } from '../core/utils/polar';
+import { pointsToDegree } from '../../../core/utils/polar';
 
 /**
  * @param point Tuple of the form `[x,y]` to be tested.

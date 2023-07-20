@@ -1,4 +1,4 @@
-import type { DisplayedLegend } from '@gosling-track';
+import type { DisplayedLegend } from 'src/tracks/gosling-track';
 import type { GoslingTrackModel } from '../gosling-track-model';
 import { IsChannelDeep } from '../gosling.schema.guards';
 import colorToHex from '../utils/color-to-hex';

@@ -9,7 +9,7 @@ import type {
     Track
 } from '../gosling.schema';
 import { IsTemplateTrack } from '../gosling.schema.guards';
-import { traverseTracks } from './spec-preprocess';
+import { traverseTracks } from '../../compiler/spec-preprocess';
 
 /**
  * Track templates officially supported by Gosling.js.

@@ -5,7 +5,7 @@ import type { GoslingSpec } from './gosling.schema';
 import type { HiGlassSpec } from './higlass.schema';
 
 import { validateGoslingSpec } from './utils/validate';
-import { compile } from './compile';
+import { compile } from '../compiler/compile';
 import { getTheme, type Theme } from './utils/theme';
 import { GoslingTemplates } from './utils/template';
 import { type GoslingApi, createApi } from './api';

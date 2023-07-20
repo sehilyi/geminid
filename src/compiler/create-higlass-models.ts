@@ -12,7 +12,7 @@ import type {
 } from '@gosling.schema';
 import type { CompleteThemeDeep } from './utils/theme';
 import type { CompileCallback } from './compile';
-import { getViewApiData } from './api-data';
+import { getViewApiData } from '../api/api-data';
 
 export function renderHiGlass(
     spec: GoslingSpec,

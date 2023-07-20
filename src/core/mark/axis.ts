@@ -1,5 +1,5 @@
 import { scaleLinear } from 'd3-scale';
-import type { Tile } from '@gosling-track';
+import type { Tile } from 'src/tracks/gosling-track';
 import type { GoslingTrackModel } from '../gosling-track-model';
 import { IsChannelDeep } from '../gosling.schema.guards';
 import colorToHex from '../utils/color-to-hex';

@@ -7,7 +7,7 @@ import {
     IsStackedMark,
     IsStackedChannel,
     IsDataDeepTileset
-} from './gosling.schema.guards';
+} from '../core/gosling.schema.guards';
 
 describe('gosling schema should be checked correctly', () => {
     it('Type guards should be checked correctly', () => {

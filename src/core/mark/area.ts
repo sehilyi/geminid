@@ -1,6 +1,6 @@
 import { min as d3min, max as d3max, group } from 'd3-array';
 import type { Channel, Datum } from '@gosling.schema';
-import type { Tile } from '@gosling-track';
+import type { Tile } from 'src/tracks/gosling-track';
 import type { GoslingTrackModel } from '../gosling-track-model';
 import { IsStackedMark, getValueUsingChannel } from '../gosling.schema.guards';
 import { cartesianToPolar } from '../utils/polar';

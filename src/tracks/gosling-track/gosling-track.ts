@@ -12,20 +12,20 @@ import type {
     ValueExtent,
     Range
 } from '@gosling.schema';
-import { type MouseEventData, isPointInsideDonutSlice } from '@gosling-mouse-event';
+import { type MouseEventData, isPointInsideDonutSlice } from 'src/tracks/gosling-track/gosling-mouse-event';
 import { BamDataFetcher, type TabularDataFetcher } from '@data-fetchers';
 import type { Tile as _Tile, TileData, TileDataBase } from '@higlass/services';
 import { LinearBrushModel } from '@gosling-brush';
 import { getTheme } from 'gosling-theme';
 import { getTabularData } from './data-abstraction';
 
-import type { CompleteThemeDeep } from '../core/utils/theme';
-import { drawMark, drawPostEmbellishment, drawPreEmbellishment } from '../core/mark';
-import { GoslingTrackModel } from '../core/gosling-track-model';
-import { validateTrack } from '../core/utils/validate';
-import { shareScaleAcrossTracks } from '../core/utils/scales';
-import { resolveSuperposedTracks } from '../core/utils/overlay';
-import colorToHex from '../core/utils/color-to-hex';
+import type { CompleteThemeDeep } from '../../core/utils/theme';
+import { drawMark, drawPostEmbellishment, drawPreEmbellishment } from '../../core/mark';
+import { GoslingTrackModel } from '../../core/gosling-track-model';
+import { validateTrack } from '../../core/utils/validate';
+import { shareScaleAcrossTracks } from '../../core/utils/scales';
+import { resolveSuperposedTracks } from '../../core/utils/overlay';
+import colorToHex from '../../core/utils/color-to-hex';
 import {
     aggregateCoverage,
     calculateData,
@@ -37,10 +37,10 @@ import {
     replaceString,
     splitExon,
     inferSvType
-} from '../core/utils/data-transform';
-import { publish } from '../core/pubsub';
-import { getRelativeGenomicPosition } from '../core/utils/assembly';
-import { getTextStyle } from '../core/utils/text-style';
+} from '../../core/utils/data-transform';
+import { publish } from '../../api/pubsub';
+import { getRelativeGenomicPosition } from '../../core/utils/assembly';
+import { getTextStyle } from '../../core/utils/text-style';
 import {
     Is2DTrack,
     IsChannelDeep,
@@ -48,10 +48,10 @@ import {
     IsXAxis,
     isTabularDataFetcher,
     hasDataTransform
-} from '../core/gosling.schema.guards';
-import { HIGLASS_AXIS_SIZE } from '../core/higlass-model';
-import { flatArrayToPairArray } from '../core/utils/array';
-import { createPluginTrack, type PluginTrackFactory, type TrackConfig } from '../core/utils/define-plugin-track';
+} from '../../core/gosling.schema.guards';
+import { HIGLASS_AXIS_SIZE } from '../../core/higlass-model';
+import { flatArrayToPairArray } from '../../core/utils/array';
+import { createPluginTrack, type PluginTrackFactory, type TrackConfig } from '../../core/utils/define-plugin-track';
 
 // Set `true` to print in what order each function is called
 export const PRINT_RENDERING_CYCLE = false;

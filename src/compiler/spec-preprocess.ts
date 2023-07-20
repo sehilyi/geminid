@@ -27,9 +27,9 @@ import {
     DEFAULT_TRACK_SIZE_2D,
     DEFAULT_TRACK_WIDTH_LINEAR,
     DEFAULT_VIEW_SPACING
-} from '../defaults';
-import { spreadTracksByData } from './overlay';
-import { getStyleOverridden } from '../utils/style';
+} from '../core/defaults';
+import { spreadTracksByData } from '../core/utils/overlay';
+import { getStyleOverridden } from '../core/utils/style';
 
 /**
  * Traverse individual tracks and call the callback function to read and/or update the track definition.

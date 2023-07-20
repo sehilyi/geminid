@@ -49,6 +49,12 @@ function BrushTrack(HGC: any, ...args: any[]): any {
 
             this.gBrush = this.gMain
                 .append('g')
+                .append('rect')
+                .attr('fill', 'red')
+                .attr('x', 0)
+                .attr('y', 0)
+                .attr('width', 100)
+                .attr('height', 100)
                 .attr('id', `brush-${this.uid}`)
                 .selectAll('.brush')
                 .data(this.circularBrushData)

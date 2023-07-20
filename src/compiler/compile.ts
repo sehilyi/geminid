@@ -1,11 +1,11 @@
-import type { GoslingSpec, TemplateTrackDef, VisUnitApiData } from './gosling.schema';
-import type { HiGlassSpec } from './higlass.schema';
-import { traverseToFixSpecDownstream, overrideDataTemplates } from './utils/spec-preprocess';
-import { replaceTrackTemplates } from './utils/template';
-import { getRelativeTrackInfo, type Size } from './utils/bounding-box';
-import type { CompleteThemeDeep } from './utils/theme';
+import type { GoslingSpec, TemplateTrackDef, VisUnitApiData } from '../core/gosling.schema';
+import type { HiGlassSpec } from '../core/higlass.schema';
+import { traverseToFixSpecDownstream, overrideDataTemplates } from './spec-preprocess';
+import { replaceTrackTemplates } from '../core/utils/template';
+import { getRelativeTrackInfo, type Size } from '../core/utils/bounding-box';
+import type { CompleteThemeDeep } from '../core/utils/theme';
 import { renderHiGlass as createHiGlassModels } from './create-higlass-models';
-import { manageResponsiveSpecs } from './responsive';
+import { manageResponsiveSpecs } from '../core/responsive';
 
 /** The callback function called everytime after the spec has been compiled */
 export type CompileCallback = (hg: HiGlassSpec, size: Size, gs: GoslingSpec, tracksAndViews: VisUnitApiData[]) => void;
