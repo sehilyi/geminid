@@ -77,6 +77,13 @@ export const GoslingComponent = forwardRef<GoslingRef, GoslingCompProps>((props,
         });
     };
 
+    // used for alt-gosling
+    const publishSpecProcessed = (props: GoslingCompProps) => {
+        if (props.spec && props.spec.id) {
+            publish('specProcessed', { id: props.spec.id, spec: props.spec });
+        }
+    }
+    
     // Gosling APIs
     useImperativeHandle(
         ref,
@@ -132,6 +139,7 @@ export const GoslingComponent = forwardRef<GoslingRef, GoslingCompProps>((props,
                         // Mount `HiGlassComponent` using this view config.
                         setViewConfig(newHiGlassSpec);
                     }
+                    publishSpecProcessed(props);
                     publishOnNewView(newTracksAndViews);
                     prevSpec.current = newGoslingSpec;
                     tracksAndViews.current = newTracksAndViews;
