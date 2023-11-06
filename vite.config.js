@@ -73,6 +73,7 @@ const alias = {
     '@gosling-lang/gosling-brush': path.resolve(__dirname, './src/tracks/gosling-brush/index.ts'),
     '@gosling-lang/dummy-track': path.resolve(__dirname, './src/tracks/dummy-track/index.ts'),
     '@data-fetchers': path.resolve(__dirname, './src/data-fetchers/index.ts'),
+    '@gosling-lang/core-utils': path.resolve(__dirname, './src/core/index.ts'),
     zlib: path.resolve(__dirname, './src/alias/zlib.ts'),
     stream: path.resolve(__dirname, './node_modules/stream-browserify') //  gmod/gff uses stream-browserify
 };
