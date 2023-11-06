@@ -16,3 +16,5 @@ export function parseServerAndTilesetUidFromUrl(url: string) {
     const tilesetUid = url.split('tileset_info/?d=')[1];
     return { server, tilesetUid };
 }
+
+export { getRelativeGenomicPosition } from './assembly';

@@ -13,3 +13,4 @@ export { validateGoslingSpec } from '@gosling-lang/gosling-schema';
 export { GoslingComponent } from './core/gosling-component';
 export type { GoslingRef } from './core/gosling-component';
 export { embed } from './core/gosling-embed';
+export { getRelativeGenomicPosition } from './core/utils';
