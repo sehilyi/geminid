@@ -68,36 +68,6 @@ const BOTTOM_PANEL_HEADER_HEIGHT = 30;
 // A key to store and get a Gosling spec via sessionStorage
 const SESSION_KEY_SPEC = 'session-gosling-spec';
 
-export const GoslingLogoSVG = (width: number, height: number) => (
-    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400" width={width} height={height}>
-        <rect style={{ fill: 'none' }} width="400" height="400" />
-        <circle cx="110.62" cy="129.64" r="41.69" />
-        <circle style={{ fill: '#fff' }} cx="124.14" cy="114.12" r="10.76" />
-        <circle cx="288.56" cy="129.64" r="41.69" />
-        <circle style={{ fill: '#fff' }} cx="302.07" cy="114.12" r="10.76" />
-        <path
-            style={{ fill: '#e18241' }}
-            d="M313.1,241.64l8.61-22.09a430.11,430.11,0,0,0-88-15.87L224,225.63A384.54,384.54,0,0,1,313.1,241.64Z"
-        />
-        <path
-            style={{ fill: '#e18241' }}
-            d="M208.63,260.53a299.77,299.77,0,0,1,90.56,16.79L308,254.79a371.68,371.68,0,0,0-90-15.47Z"
-        />
-        <path
-            style={{ fill: '#e18241' }}
-            d="M174.4,225.56l-9-22a431.34,431.34,0,0,0-88,15.43l8.9,22A385.08,385.08,0,0,1,174.4,225.56Z"
-        />
-        <path
-            style={{ fill: '#e18241' }}
-            d="M100.71,276.35a300.51,300.51,0,0,1,87.91-15.82L180,239.29a372.51,372.51,0,0,0-88.3,14.76Z"
-        />
-        <path
-            style={{ fill: '#e18241' }}
-            d="M106.52,290.71c27.53,13.92,59.05,21.34,92.05,21.34h0c33.68,0,65.83-7.72,93.75-22.2a291.31,291.31,0,0,0-186.33-.4Z"
-        />
-    </svg>
-);
-
 const getIconSVG = (d: ICON_INFO, w?: number, h?: number, f?: string) => (
     <svg
         key={stringify(d)}
@@ -769,7 +739,7 @@ function Editor(props: RouteComponentProps) {
                     style={{ cursor: 'pointer', lineHeight: '40px' }}
                     onClick={() => window.open(`${window.location.pathname}`, '_blank')}
                 >
-                    <span className="logo">{GoslingLogoSVG(20, 20)}</span>
+                    <span className="logo">{gosling.getGoslingLogoSvg(20, 20)}</span>
                     Gosling.js Editor
                 </button>
                 {urlSpec && <small> Displaying a custom spec contained in URL</small>}
@@ -1381,7 +1351,7 @@ function Editor(props: RouteComponentProps) {
                         {getIconSVG(ICONS.CLOSE, 30, 30)}
                     </button>
                     <div>
-                        <span className="logo">{GoslingLogoSVG(80, 80)}</span>
+                        <span className="logo">{gosling.getGoslingLogoSvg(80, 80)}</span>
                     </div>
                     <h3>Gosling.js Editor</h3>
                     {`Gosling.js v${gosling.version}`}
