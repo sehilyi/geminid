@@ -23,7 +23,7 @@ export interface TextTrackOptions {
     fontWeight: string;
     align: 'left' | 'right' | 'middle';
     offsetY: number;
-    text: string;
+    text?: string;
 }
 
 export type TextTrackContext = PixiTrackContext;

@@ -213,7 +213,11 @@ export function parseGenomicPosition(position: string): { chromosome: string; st
  * A class that consistently manage and convert genomics positions.
  */
 export class GenomicPositionHelper {
-    constructor(public chromosome: string, public start?: number, public end?: number) {}
+    constructor(
+        public chromosome: string,
+        public start?: number,
+        public end?: number
+    ) {}
     static fromString(str: string) {
         const result = parseGenomicPosition(str);
         return new GenomicPositionHelper(result.chromosome, result.start, result.end);

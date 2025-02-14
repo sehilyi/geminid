@@ -49,7 +49,7 @@ import {
 } from 'd3-scale-chromatic';
 import { resolveSuperposedTracks } from '../core/utils/overlay';
 import type { TabularDataFetcher } from '@data-fetchers';
-import type { ProcessedDummyTrack, ProcessedTrack } from 'demo/track-def/types';
+import type { ProcessedDummyTrack, ProcessedTrack } from '../track-def/types';
 
 export const PREDEFINED_COLOR_STR_MAP: { [k: string]: (t: number) => string } = {
     viridis: interpolateViridis,

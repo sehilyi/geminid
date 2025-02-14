@@ -126,8 +126,8 @@ export function spreadTracksByData(tracks: Track[]): Track[] {
                     IsSingleTrack(track) && IsChannelDeep(track.y) && !track.y.axis && overlayOnPreviousTrack
                         ? ({ ...track.y, axis: i === 1 ? 'right' : 'none' } as ChannelDeep)
                         : IsSingleTrack(track)
-                        ? track.y
-                        : undefined;
+                          ? track.y
+                          : undefined;
 
                 if (track.title && i !== arr.length - 1 && arr.length !== 1) {
                     delete track.title; // remove `title` except the last one

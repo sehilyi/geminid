@@ -15,8 +15,17 @@ body {
 /* Common font styles */
 body,
 button {
-    font-family: 'Helvetica Neue', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', 'Ubuntu',
-        'Cantarell', 'Droid Sans', sans-serif;
+    font-family:
+        'Helvetica Neue',
+        -apple-system,
+        BlinkMacSystemFont,
+        'Segoe UI',
+        'Roboto',
+        'Oxygen',
+        'Ubuntu',
+        'Cantarell',
+        'Droid Sans',
+        sans-serif;
     font-size: 14px;
     text-align: left;
     line-height: 1.42857143;

@@ -3,6 +3,7 @@ import type { SingleTrack, ChannelDeep, ChannelTypes, OverlaidTrack, Track } fro
 import { IsChannelDeep } from './gosling.schema.guards';
 import { resolveSuperposedTracks } from '../core/utils/overlay';
 import GoslingSchema from './gosling.schema.json';
+import type { ProcessedTrack } from 'src/track-def/types';
 
 export interface Validity {
     message: string;
@@ -37,10 +38,11 @@ export function validateSpec(schema: any, spec: any, silence = false): Validity 
     return { state: valid ? 'success' : 'warn', message, details };
 }
 
-export function validateTrack(track: Track) {
+export function validateProcessedTrack(track: ProcessedTrack) {
     let valid = true;
     const errorMessages: string[] = [];
 
+    // @ts-expect-error This function should be re-written
     const resolvedTrack = resolveSuperposedTracks(track);
 
     resolvedTrack.forEach(spec => {

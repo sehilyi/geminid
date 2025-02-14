@@ -11,6 +11,7 @@ import { scaleLinear } from 'd3-scale';
 import { DataFetcher } from '@higlass/datafetcher';
 import { signal, type Signal } from '@preact/signals-core';
 import type { Tile } from '@gosling-lang/gosling-track';
+import type { ProcessedTrack } from 'src/track-def/types';
 
 export type HeatmapTrackContext = TiledPixiTrackContext & {
     svgElement: SVGElement;
@@ -21,6 +22,7 @@ export type HeatmapTrackContext = TiledPixiTrackContext & {
 };
 
 export type HeatmapTrackOptions = TiledPixiTrackOptions & {
+    spec: ProcessedTrack;
     maxDomain: number;
     dataTransform?: unknown;
     extent?: string;
@@ -28,6 +30,7 @@ export type HeatmapTrackOptions = TiledPixiTrackOptions & {
     showTooltip?: boolean;
     heatmapValueScaling?: string;
     colorRange?: unknown;
+    mousePositionColor: string;
     showMousePosition?: boolean;
     scaleStartPercent?: unknown;
     scaleEndPercent?: unknown;

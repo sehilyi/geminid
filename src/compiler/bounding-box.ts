@@ -10,7 +10,7 @@ import {
 import { resolveSuperposedTracks } from '../core/utils/overlay';
 import { traverseTracksAndViews, traverseViewArrangements } from './spec-preprocess';
 import type { CompleteThemeDeep } from '../core/utils/theme';
-import type { ProcessedCircularTrack, ProcessedTrack } from '../../demo/track-def/types';
+import type { ProcessedCircularTrack, ProcessedTrack } from '../track-def/types';
 export interface Size {
     width: number;
     height: number;

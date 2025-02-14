@@ -28,19 +28,12 @@ export type AxisTrackOptions = {
     layout: 'linear' | 'circular';
     labelMargin: number;
     excludeChrPrefix: boolean;
-    labelPosition: string;
-    labelColor: string;
-    labelTextOpacity: number;
-    trackBorderWidth: number;
-    trackBorderColor: string;
     tickPositions: 'even' | 'ends';
     fontSize: number;
     fontFamily: string; // 'Arial',
     fontWeight: NonNullable<TextStyle['fontWeight']>;
     color: string;
     stroke: string;
-    backgroundColor: string;
-    showMousePosition: boolean;
     tickColor: number | string;
     tickFormat?: string;
     assembly?: Assembly;
@@ -81,19 +74,12 @@ const defaultOptions = {
     layout: 'linear',
     labelMargin: 5,
     excludeChrPrefix: false,
-    labelPosition: 'none',
-    labelColor: 'black',
-    labelTextOpacity: 0.4,
-    trackBorderWidth: 0,
-    trackBorderColor: 'black',
     tickPositions: 'even',
     fontSize: 12,
     fontFamily: 'sans-serif', // 'Arial',
     fontWeight: 'normal',
     color: '#808080',
     stroke: '#ffffff',
-    backgroundColor: 'transparent',
-    showMousePosition: false,
     tickColor: TICK_COLOR
 };
 
@@ -175,10 +161,6 @@ export class AxisTrackClass extends PixiTrack<AxisTrackOptions> {
         this.animate = animate;
 
         this.pubSubs = [];
-
-        if (this.options.showMousePosition && !this.hideMousePosition) {
-            this.hideMousePosition = showMousePosition(this, this.is2d, this.isShowGlobalMousePosition());
-        }
 
         let chromSizesPath = chromInfoPath;
 
@@ -304,15 +286,6 @@ export class AxisTrackClass extends PixiTrack<AxisTrackOptions> {
         }
 
         super.rerender(options, force);
-
-        if (this.options.showMousePosition && !this.hideMousePosition) {
-            this.hideMousePosition = showMousePosition(this, this.is2d, this.isShowGlobalMousePosition());
-        }
-
-        if (!this.options.showMousePosition && this.hideMousePosition) {
-            this.hideMousePosition();
-            this.hideMousePosition = undefined;
-        }
     }
 
     formatTick(pos: number) {

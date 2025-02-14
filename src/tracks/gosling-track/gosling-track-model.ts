@@ -8,7 +8,11 @@ import type {
     Color,
     Stroke
 } from '@gosling-lang/gosling-schema';
-import { validateTrack, getGenomicChannelFromTrack, getGenomicChannelKeyFromTrack } from '@gosling-lang/gosling-schema';
+import {
+    validateProcessedTrack,
+    getGenomicChannelFromTrack,
+    getGenomicChannelKeyFromTrack
+} from '@gosling-lang/gosling-schema';
 import {
     type ScaleLinear,
     scaleLinear,
@@ -886,6 +890,6 @@ export class GoslingTrackModel {
      * Validate the original spec.
      */
     public validateSpec(): { valid: boolean; errorMessages: string[] } {
-        return validateTrack(this.originalSpec());
+        return validateProcessedTrack(this.originalSpec());
     }
 }

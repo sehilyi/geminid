@@ -6,7 +6,7 @@ import { convertToFlatTracks } from './spec-preprocess';
 import type { SingleView } from '@gosling-lang/gosling-schema';
 import { spreadTracksByData } from '../core/utils/overlay';
 import { getDataFetcher } from '../../demo/renderer/dataFetcher';
-import type { ProcessedTrack } from 'demo/track-def/types';
+import type { ProcessedTrack } from '../track-def/types';
 
 // TODO: Move this to dataFetcher.test.ts after we move the /demo/renderer under /src
 describe('Compiler with UrlToFetchOptions', () => {

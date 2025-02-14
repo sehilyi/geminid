@@ -21,7 +21,7 @@ import { getTabularData } from './data-abstraction';
 import type { CompleteThemeDeep } from '../../core/utils/theme';
 import { drawMark, drawPostEmbellishment, drawPreEmbellishment } from '../../core/mark';
 import { GoslingTrackModel } from './gosling-track-model';
-import { validateTrack } from '@gosling-lang/gosling-schema';
+import { validateProcessedTrack } from '@gosling-lang/gosling-schema';
 import { shareScaleAcrossTracks } from '../../core/utils/scales';
 import { resolveSuperposedTracks } from '../../core/utils/overlay';
 import colorToHex from '../../core/utils/color-to-hex';
@@ -59,6 +59,7 @@ import { select, type Selection } from 'd3-selection';
 import { format } from 'd3-format';
 import { calculate1DVisibleTiles } from './utils';
 import { DEFAULT_AXIS_SIZE } from '../../compiler/defaults';
+import type { ProcessedTrack } from 'src/track-def/types';
 
 // Set `true` to print in what order each function is called
 export const PRINT_RENDERING_CYCLE = false;
@@ -86,8 +87,23 @@ export interface GoslingTrackOptions {
      * Track IDs that are superposed with this track, containing the id of this track itself
      */
     siblingIds: string[];
-    spec: SingleTrack | OverlaidTrack;
+    spec: ProcessedTrack;
     theme: CompleteThemeDeep;
+    showMousePosition: boolean;
+    mousePositionColor: string;
+    name?: string;
+    // TODO: are these below all really needed?
+    labelPosition: string;
+    labelShowResolution: boolean;
+    labelColor: string;
+    labelBackgroundColor: string;
+    labelBackgroundOpacity: number;
+    labelTextOpacity: number;
+    labelLeftMargin: number;
+    labelTopMargin: number;
+    labelRightMargin: number;
+    labelBottomMargin: number;
+    backgroundColor: string;
 }
 
 export type GoslingTrackContext = Context<Tile, GoslingTrackOptions>;
@@ -192,7 +208,7 @@ export class GoslingTrackClass extends TiledPixiTrack<Tile, GoslingTrackOptions>
         this.fetchedTiles = {};
         this.tileSize = this.tilesetInfo?.tile_size ?? 1024;
 
-        const { valid, errorMessages } = validateTrack(this.options.spec);
+        const { valid, errorMessages } = validateProcessedTrack(this.options.spec);
 
         if (!valid) {
             console.warn('The specification of the following track is invalid', errorMessages, this.options.spec);

@@ -5,7 +5,7 @@ import { Signal } from '@preact/signals-core';
 import { TextTrack } from '@gosling-lang/text-track';
 
 import { panZoom, panZoomHeatmap } from '@gosling-lang/interactors';
-import { type TrackDefs, TrackType } from '../track-def/main';
+import { type TrackDefs, TrackType } from '../../src/track-def';
 import { getDataFetcher } from './dataFetcher';
 import type { LinkedEncoding } from '../linking/linkedEncoding';
 import { BrushCircularTrack } from '@gosling-lang/brush-circular';

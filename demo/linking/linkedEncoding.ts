@@ -1,9 +1,15 @@
-import { IsDummyTrack, IsMultipleViews, IsSingleView, type Assembly, type SingleView } from '@gosling-lang/gosling-schema';
+import {
+    IsDummyTrack,
+    IsMultipleViews,
+    IsSingleView,
+    type Assembly,
+    type SingleView
+} from '@gosling-lang/gosling-schema';
 import { GenomicPositionHelper, computeChromSizes } from '../../src/core/utils/assembly';
 import { signal, type Signal } from '@preact/signals-core';
 import type { GoslingSpec } from 'gosling.js';
-import { TrackType } from '../track-def/main';
-import { isHeatmapTrack } from '../track-def/heatmap';
+import { TrackType } from '../../src/track-def';
+import { isHeatmapTrack } from '../../src/track-def/heatmap';
 
 /**
  * This is the information needed to link tracks together

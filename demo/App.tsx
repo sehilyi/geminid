@@ -16,10 +16,6 @@ import { compile } from '../src/compiler/compile';
 import { getTheme } from '../src/core/utils/theme';
 
 import './App.css';
-import { createTrackDefs, renderTrackDefs, showTrackInfoPositions } from './track-def/main';
-import type { TrackInfo } from 'src/compiler/bounding-box';
-import type { GoslingSpec } from 'gosling.js';
-import { getLinkedEncodings } from './linking/linkedEncoding';
 import { GoslingComponent } from './GoslingComponent';
 
 function App() {

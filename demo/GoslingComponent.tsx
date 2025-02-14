@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PixiManager } from '@pixi-manager';
 import { compile, type UrlToFetchOptions } from '../src/compiler/compile';
 import { getTheme } from '../src/core/utils/theme';
-import { createTrackDefs } from './track-def/main';
+import { createTrackDefs } from '../src/track-def';
 import { renderTrackDefs } from './renderer/main';
 import type { TrackInfo } from 'src/compiler/bounding-box';
 import type { GoslingSpec } from 'gosling.js';
