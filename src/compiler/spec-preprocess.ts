@@ -7,8 +7,7 @@ import type {
     PartialTrack,
     CommonTrackDef,
     CommonViewDef,
-    MultipleViews,
-    DisplaceTransform
+    MultipleViews
 } from '@gosling-lang/gosling-schema';
 import {
     IsSingleTrack,
@@ -205,40 +204,6 @@ export function traverseToFixSpecDownstream(spec: GoslingSpec | SingleView, pare
             }
             if (!track.height) {
                 track.height = Is2DTrack(track) ? DEFAULT_TRACK_SIZE_2D : DEFAULT_TRACK_HEIGHT_LINEAR;
-            }
-            /**
-             * Process a stack option.
-             */
-            if ('displacement' in track) {
-                if (
-                    track.displacement?.type === 'pile' &&
-                    track.row === undefined &&
-                    IsChannelDeep(track.x) &&
-                    track.x.field &&
-                    IsChannelDeep(track.xe) &&
-                    track.xe.field
-                    // Question: Should we consider mark types? (e.g., link might not be supported?)
-                ) {
-                    const newField = uuid();
-                    const startField = track.x.field;
-                    const endField = track.xe.field;
-                    const padding = track.displacement.padding;
-                    const displaceTransform: DisplaceTransform = {
-                        type: 'displace',
-                        newField,
-                        boundingBox: { startField, endField, padding },
-                        method: 'pile'
-                    };
-
-                    // Add a data transform for stacking
-                    if (!track.dataTransform) {
-                        track.dataTransform = [];
-                    }
-                    track.dataTransform = [...track.dataTransform, displaceTransform];
-                    track.row = { field: newField, type: 'nominal' };
-                } else if (track.displacement?.type === 'spread') {
-                    // ...
-                }
             }
 
             /*

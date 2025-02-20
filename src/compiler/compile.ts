@@ -5,6 +5,7 @@ import { getRelativeTrackInfo, type Size, type TrackInfo } from './bounding-box'
 import type { CompleteThemeDeep } from '../core/utils/theme';
 import { collectViewsAndTracks } from './views-and-tracks';
 import { manageResponsiveSpecs } from './responsive';
+import { normalizeSpec } from './normalize';
 
 interface CompileResult {
     size: Size;
@@ -31,8 +32,8 @@ export function compile(
     // Make sure to keep the original spec as-is
     const specCopy = JSON.parse(JSON.stringify(spec));
 
-    // Replace track templates with raw gosling specs (i.e., `TemplateTrack` => `SingleTrack | OverlaidTrack`)
-    replaceTrackTemplates(specCopy, templates);
+    // Normalize
+    normalizeSpec(specCopy, templates);
 
     // Fix track specs by looking into the root-level spec
     traverseToFixSpecDownstream(specCopy);
