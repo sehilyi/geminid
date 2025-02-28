@@ -17,8 +17,8 @@ const DEBOUNCE_TIME = 200;
 type InferTileType<Config extends BamData> = Config['extractJunction'] extends true
     ? Junction
     : Config['loadMates'] extends true
-    ? SegmentWithMate
-    : Segment;
+      ? SegmentWithMate
+      : Segment;
 
 class BamDataFetcher<Config extends BamData> implements TabularDataFetcher<InferTileType<Config>> {
     static config = { type: 'bam' };

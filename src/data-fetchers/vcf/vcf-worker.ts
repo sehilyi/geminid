@@ -29,7 +29,10 @@ type VcfFileOptions = {
 class VcfFile {
     #parser?: VCF;
     #uid: string;
-    constructor(public tbi: TabixIndexedFile, uid: string) {
+    constructor(
+        public tbi: TabixIndexedFile,
+        uid: string
+    ) {
         this.#uid = uid;
     }
     /**

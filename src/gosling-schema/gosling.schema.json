@@ -367,6 +367,112 @@
       },
       "type": "array"
     },
+    "ChromospaceTrack": {
+      "additionalProperties": false,
+      "properties": {
+        "_invalidTrack": {
+          "description": "internal",
+          "type": "boolean"
+        },
+        "assembly": {
+          "$ref": "#/definitions/Assembly",
+          "description": "A string that specifies the genome builds to use. Currently support `\"hg38\"`, `\"hg19\"`, `\"hg18\"`, `\"hg17\"`, `\"hg16\"`, `\"mm10\"`, `\"mm9\"`, and `\"unknown\"`.\n\n__Note:__: with `\"unknown\"` assembly, genomic axes do not show chrN: in labels."
+        },
+        "color": {
+          "type": "string"
+        },
+        "data3D": {
+          "type": "string"
+        },
+        "height": {
+          "description": "Specify the track height in pixels.",
+          "type": "number"
+        },
+        "id": {
+          "description": "Assigned to `uid` in a HiGlass view config, used for API and caching.",
+          "type": "string"
+        },
+        "layout": {
+          "const": "spatial",
+          "type": "string"
+        },
+        "orientation": {
+          "$ref": "#/definitions/Orientation",
+          "description": "Specify the orientation."
+        },
+        "overlayOnPreviousTrack": {
+          "const": false,
+          "type": "boolean"
+        },
+        "spatial": {
+          "additionalProperties": false,
+          "properties": {
+            "chr": {
+              "type": "string"
+            },
+            "coord": {
+              "type": "string"
+            },
+            "x": {
+              "type": "string"
+            },
+            "y": {
+              "type": "string"
+            },
+            "z": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z",
+            "chr",
+            "coord"
+          ],
+          "type": "object"
+        },
+        "static": {
+          "description": "Whether to disable [Zooming and Panning](http://gosling-lang.org/docs/user-interaction#zooming-and-panning), __Default:__ `false`.",
+          "type": "boolean"
+        },
+        "style": {
+          "additionalProperties": {
+            "type": [
+              "string",
+              "number"
+            ]
+          },
+          "type": "object"
+        },
+        "test": {
+          "type": "string"
+        },
+        "title": {
+          "description": "If defined, will show the textual label on the left-top corner of a track.",
+          "type": "string"
+        },
+        "width": {
+          "description": "Specify the track width in pixels.",
+          "type": "number"
+        },
+        "zoomLimits": {
+          "items": {
+            "type": "null"
+          },
+          "maxItems": 2,
+          "minItems": 2,
+          "type": "array"
+        }
+      },
+      "required": [
+        "color",
+        "test",
+        "data3D",
+        "spatial"
+      ],
+      "type": "object"
+    },
     "Color": {
       "additionalProperties": false,
       "properties": {
@@ -3500,7 +3606,8 @@
     "Layout": {
       "enum": [
         "linear",
-        "circular"
+        "circular",
+        "spatial"
       ],
       "type": "string"
     },
@@ -3572,7 +3679,10 @@
         "triangleRight",
         "triangleBottom",
         "brush",
-        "_header"
+        "_header",
+        "sphere",
+        "box",
+        "octahedron"
       ],
       "type": "string"
     },
@@ -5309,11 +5419,17 @@
             },
             {
               "$ref": "#/definitions/ChannelValue"
+            },
+            {
+              "type": "string"
             }
           ]
         },
         "data": {
           "$ref": "#/definitions/DataDeep"
+        },
+        "data3D": {
+          "type": "string"
         },
         "dataTransform": {
           "items": {
@@ -5379,6 +5495,10 @@
               "const": "linear",
               "description": "Only linear layout are supported at this time",
               "type": "string"
+            },
+            {
+              "const": "spatial",
+              "type": "string"
             }
           ],
           "description": "Specify the layout type of all tracks."
@@ -5419,7 +5539,15 @@
           "type": "number"
         },
         "overlayOnPreviousTrack": {
-          "type": "boolean"
+          "anyOf": [
+            {
+              "type": "boolean"
+            },
+            {
+              "const": false,
+              "type": "boolean"
+            }
+          ]
         },
         "row": {
           "anyOf": [
@@ -5444,6 +5572,34 @@
         "spacing": {
           "description": "The size of the gap (1) between tracks, (2) between views, and (3) of the origin of circular tracks. The effect of this property depends on where on the spec you specify the `spacing`.\n\nIn a linear layout, this value is used in pixels, while in a circular layout, this value is used relative to the height of the tracks or views.",
           "type": "number"
+        },
+        "spatial": {
+          "additionalProperties": false,
+          "properties": {
+            "chr": {
+              "type": "string"
+            },
+            "coord": {
+              "type": "string"
+            },
+            "x": {
+              "type": "string"
+            },
+            "y": {
+              "type": "string"
+            },
+            "z": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "x",
+            "y",
+            "z",
+            "chr",
+            "coord"
+          ],
+          "type": "object"
         },
         "startAngle": {
           "description": "Specify the start angle (in the range of [0, 360]) of circular tracks (`{\"layout\": \"circular\"}`).",
@@ -5495,6 +5651,15 @@
             {
               "$ref": "#/definitions/DummyTrackStyle",
               "description": "Defines how the track is styled"
+            },
+            {
+              "additionalProperties": {
+                "type": [
+                  "string",
+                  "number"
+                ]
+              },
+              "type": "object"
             }
           ],
           "description": "Define the [style](http://gosling-lang.org/docs/visual-channel#style-related-properties) of multive views. Will be overwritten by the style of children elements (e.g., view, track)."
@@ -5503,6 +5668,9 @@
           "type": "string"
         },
         "template": {
+          "type": "string"
+        },
+        "test": {
           "type": "string"
         },
         "text": {
@@ -5667,6 +5835,14 @@
             },
             {
               "description": "Unused property for DummyTrack",
+              "items": {
+                "type": "null"
+              },
+              "maxItems": 2,
+              "minItems": 2,
+              "type": "array"
+            },
+            {
               "items": {
                 "type": "null"
               },
@@ -8902,6 +9078,9 @@
         },
         {
           "$ref": "#/definitions/DummyTrack"
+        },
+        {
+          "$ref": "#/definitions/ChromospaceTrack"
         }
       ]
     },

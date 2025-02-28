@@ -6,6 +6,7 @@ import { type BrushLinearTrackOptions } from '@gosling-lang/brush-linear';
 import type { TrackInfo } from '../../src/compiler/bounding-box';
 import type { CompleteThemeDeep } from '../../src/core/utils/theme';
 import type { GoslingTrackOptions } from '../../src/tracks/gosling-track/gosling-track';
+import type { SpatialTrackOptions } from 'src/tracks/spatial-track/spatial-track';
 
 import { proccessTextHeader } from './text';
 import { processHeatmapTrack, isHeatmapTrack } from './heatmap';
@@ -25,8 +26,10 @@ export enum TrackType {
     Axis,
     BrushLinear,
     BrushCircular,
-    Heatmap
+    Heatmap,
+    Spatial
 }
+
 
 /**
  * Associate options to each track type
@@ -39,6 +42,7 @@ interface TrackOptionsMap {
     [TrackType.BrushLinear]: BrushLinearTrackOptions;
     [TrackType.BrushCircular]: BrushCircularTrackOptions;
     [TrackType.Heatmap]: HeatmapTrackOptions;
+    [TrackType.Spatial]: SpatialTrackOptions; //~ TODO: add actual options
 }
 
 /**
@@ -83,6 +87,21 @@ export function createTrackDefs(trackInfos: TrackInfo[], theme: Required<Complet
             // We have a dummy track
             const dummyTrackDefs = processDummyTrack(track, boundingBox);
             trackDefs.push(...dummyTrackDefs);
+        } else if ('layout' in track && track.layout === 'spatial') {
+            // We have a 3D track
+            console.warn('got 3D track', track);
+            const trackDef: TrackDef<SpatialTrackOptions> = {
+                type: TrackType.Spatial,
+                trackId: track.id,
+                boundingBox,
+                options: {
+                    spec: track,
+                    color: track.color ? track.color.value : undefined,
+                    test: track.test,
+                    data3D: track.data3D,
+                }
+            };
+            trackDefs.push(trackDef);
         } else {
             // We have a gosling track
             const goslingAxisDefs = processGoslingTrack(track, boundingBox, theme);

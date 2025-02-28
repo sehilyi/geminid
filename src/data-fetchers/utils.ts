@@ -17,7 +17,11 @@ export class DataSource<File, Options> {
     chromInfo: ExtendedChromInfo;
     tilesetInfo: ReturnType<typeof tilesetInfoFromChromInfo>;
 
-    constructor(public file: File, chromSizes: ChromSizes, public options: Options) {
+    constructor(
+        public file: File,
+        chromSizes: ChromSizes,
+        public options: Options
+    ) {
         this.chromInfo = sizesToChromInfo(chromSizes);
         this.tilesetInfo = tilesetInfoFromChromInfo(this.chromInfo);
     }

@@ -80,7 +80,7 @@ export type ResponsiveSpecOfMultipleViews = {
     }[];
 };
 
-export type Layout = 'linear' | 'circular';
+export type Layout = 'linear' | 'circular' | 'spatial';
 export type Orientation = 'horizontal' | 'vertical';
 
 /** Custom chromosome sizes, e.g., [["foo", 1000], ["bar", 300], ["baz", 240]] */
@@ -154,7 +154,7 @@ export interface CommonViewDef {
 }
 
 /* ----------------------------- TRACK ----------------------------- */
-export type Track = SingleTrack | OverlaidTrack | TemplateTrack | DummyTrack;
+export type Track = SingleTrack | OverlaidTrack | TemplateTrack | DummyTrack | ChromospaceTrack;
 
 export interface CommonTrackDef extends CommonViewDef {
     /** Assigned to `uid` in a HiGlass view config, used for API and caching. */
@@ -195,6 +195,31 @@ export interface CommonTrackDef extends CommonViewDef {
     _renderingId?: string;
     /** internal */
     _invalidTrack?: boolean; // flag to ignore rendering certain tracks if they have problems // !!! TODO: add tests
+}
+
+export interface ChromospaceTrack
+    extends Pick<
+        CommonTrackDef,
+        'width' | 'height' | 'id' | 'title' | '_invalidTrack' | 'orientation' | 'static' | 'assembly'
+    > {
+    //type: '3D';
+    color: string; //~ just testing
+    test: string;
+    data3D: string;
+    spatial: {
+        x: string;
+        y: string;
+        z: string;
+        chr: string;
+        coord: string;
+    };
+
+    // Some properties added just to be consistent with our track types.
+    // These make type checking less complicated during compiling, but certainly this can be removed/changed reflecting on the use cases.
+    layout?: 'spatial'; // internal property
+    overlayOnPreviousTrack?: false; // internal property
+    style?: { [key: string]: string | number }; // Any style-related properties to support?
+    zoomLimits?: [null, null]; // This determines whether users can zoom ifinitely or not. Unused at the moment.
 }
 
 /**
@@ -261,7 +286,11 @@ export type Mark =
     | 'triangleBottom'
     | 'brush'
     // The _header mark is used internally for text tracks
-    | '_header';
+    | '_header'
+    // Spatial track
+    | 'sphere'
+    | 'box'
+    | 'octahedron';
 
 /* ----------------------------- API & MOUSE EVENTS ----------------------------- */
 interface CommonEventData {

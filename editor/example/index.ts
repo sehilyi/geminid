@@ -423,6 +423,24 @@ export const editorExampleObj: {
         spec: JsonExampleSpecs.EX_SPEC_PERF_ALIGNMENT,
         image: THUMBNAILS.PERF_ALIGNMENT
     },
+    SPATIAL_LAYOUT: {
+        group: 'Experimental',
+        name: 'Spatial Layout: Integrating spatial models of chromatin',
+        spec: JsonExampleSpecs.EX_SPEC_SPATIAL,
+        image: THUMBNAILS.SPATIAL_DRAFT
+    },
+    SPATIAL_LAYOUT_MIN: {
+        group: 'Experimental',
+        name: 'Spatial Layout: Minimal',
+        spec: JsonExampleSpecs.EX_SPEC_SPATIAL_MINIMAL,
+        image: THUMBNAILS.SPATIAL_DRAFT
+    },
+    SPATIAL_LAYOUT_MULT_TRACKS: {
+        group: 'Experimental',
+        name: 'Spatial Layout: Multiple Track',
+        spec: JsonExampleSpecs.EX_SPEC_SPATIAL_MULTIPLE_TRACKS,
+        image: THUMBNAILS.SPATIAL_DRAFT
+    },
     CORCES_ET_AL: {
         group: 'Coordinated Multiple Views',
         name: 'Corces et al. 2020',

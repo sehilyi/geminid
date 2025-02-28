@@ -924,7 +924,10 @@
         "triangleRight",
         "triangleBottom",
         "brush",
-        "_header"
+        "_header",
+        "sphere",
+        "box",
+        "octahedron"
       ],
       "type": "string"
     },

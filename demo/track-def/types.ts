@@ -13,7 +13,7 @@ import type { DataDeep, Assembly, DummyTrackStyle, Mark, X, Y } from '@gosling-l
  */
 
 /** A Track after it has been compiled */
-export type ProcessedTrack = ProcessedLinearTrack | ProcessedCircularTrack | ProcessedDummyTrack;
+export type ProcessedTrack = ProcessedLinearTrack | ProcessedCircularTrack | ProcessedDummyTrack | ProcessedSpatialTrack;
 /** All tracks potentially have these properties */
 export interface ProcessedTrackBase {
     id: string;
@@ -47,6 +47,12 @@ export type ProcessedCircularTrack = ProcessedTrackBase & {
     endAngle: number;
     outerRadius: number;
     innerRadius: number;
+};
+
+export type ProcessedSpatialTrack = ProcessedTrackBase & {
+    layout: 'spatial';
+    test: string;
+    data3D: string;
 };
 
 export type ProcessedDummyTrack = ProcessedTrackBase & {
