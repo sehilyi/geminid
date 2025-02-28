@@ -1,13 +1,14 @@
 import type { GoslingSpec, TemplateTrackDef, VisUnitApiData } from '@gosling-lang/gosling-schema';
 import type { HiGlassSpec } from '@gosling-lang/higlass-schema';
 import { traverseToFixSpecDownstream } from './spec-preprocess';
-import { replaceTrackTemplates } from '../core/utils/template';
+import { GoslingTemplates, replaceTrackTemplates } from '../core/utils/template';
 import { getRelativeTrackInfo, type Size } from './bounding-box';
 import type { CompleteThemeDeep } from '../core/utils/theme';
 import type { UrlToFetchOptions } from 'src/core/gosling-component';
 import { renderHiGlass as createHiGlassModels } from './create-higlass-models';
 import { manageResponsiveSpecs } from './responsive';
 import type { IdTable } from '../api/track-and-view-ids';
+import { getTheme } from '@gosling-lang/gosling-theme';
 
 /** The callback function called everytime after the spec has been compiled */
 export type CompileCallback = (
@@ -18,15 +19,18 @@ export type CompileCallback = (
     idTable: IdTable
 ) => void;
 
+/**
+ * Process the Gosling specification, including normalization and filling in defaults.
+ */
 export function compile(
     spec: GoslingSpec,
     callback: CompileCallback,
-    templates: TemplateTrackDef[],
-    theme: Required<CompleteThemeDeep>,
+    templates: TemplateTrackDef[] = GoslingTemplates,
+    theme: Required<CompleteThemeDeep> = getTheme('light'),
     containerStatus: {
         containerSize?: { width: number; height: number };
         containerParentSize?: { width: number; height: number };
-    },
+    } = {},
     urlToFetchOptions?: UrlToFetchOptions
 ) {
     // Make sure to keep the original spec as-is
